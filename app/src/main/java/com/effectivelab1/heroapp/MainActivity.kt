@@ -15,8 +15,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Theme {
-                val navController = rememberNavController() // Создаем NavController
-                HeroListScreen(navController) // Отображаем экран со списком героев
+                val navController = rememberNavController()
+                HeroListScreen(navController)
                 }
             }
         }
