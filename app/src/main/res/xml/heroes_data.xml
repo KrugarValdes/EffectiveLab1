@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <heroes>
+        <hero>
+            <id>1</id>
+            <name>@string/hero_deadpool</name>
+            <imageUrl>https://github.com/KrugarValdes/Effective/blob/main/deadpool.png?raw=true</imageUrl>
+            <description>@string/hero_deadpool_description</description>
+        </hero>
+        <hero>
+            <id>2</id>
+            <name>@string/hero_spiderman</name>
+            <imageUrl>https://github.com/KrugarValdes/Effective/blob/main/spiderman.png?raw=true</imageUrl>
+            <description>@string/hero_spiderman_description</description>
+        </hero>
+        <hero>
+            <id>3</id>
+            <name>@string/hero_ironman</name>
+            <imageUrl>https://github.com/KrugarValdes/Effective/blob/main/ironman.png?raw=true</imageUrl>
+            <description>@string/hero_ironman_description</description>
+        </hero>
+        <hero>
+            <id>4</id>
+            <name>@string/hero_ironman</name>
+            <imageUrl>https://cdn-ru.bitrix24.ru/b21539070/landing/e60/e60d236619195d12ecc1b769bf2f598e/ACD_1x.jpg</imageUrl>
+            <description>@string/hero_ironman_description</description>
+        </hero>
+        <hero>
+            <id>5</id>
+            <name>@string/hero_ironman</name>
+            <imageUrl>https://example.com/ironman.jpg</imageUrl>
+            <description>@string/hero_ironman_description</description>
+        </hero>
+        <hero>
+            <id>6</id>
+            <name>@string/hero_ironman</name>
+            <imageUrl>https://example.com/ironman.jpg</imageUrl>
+            <description>@string/hero_ironman_description</description>
+        </hero>
+        <hero>
+            <id>7</id>
+            <name>@string/hero_ironman</name>
+            <imageUrl>https://example.com/ironman.jpg</imageUrl>
+            <description>@string/hero_ironman_description</description>
+        </hero>
+    </heroes>
+</resources>
