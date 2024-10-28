@@ -5,21 +5,24 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.effectivelab1.heroapp.ui.theme.Theme
 import androidx.navigation.compose.rememberNavController
-import com.effectivelab1.heroapp.ui.screens.HeroListScreen
+import com.effectivelab1.heroapp.navigation.NavGraph
+import com.effectivelab1.heroapp.ui.theme.HeroAppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            Theme {
+            HeroAppTheme {
                 val navController = rememberNavController()
-                HeroListScreen()
-                }
+                NavGraph(
+                    navController = navController,
+                    onItemChanged = { index -> }
+                )
             }
         }
     }
+}
 
 

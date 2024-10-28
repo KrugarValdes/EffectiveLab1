@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="app_background">#2B272B</color>
+    <color name="card_background">#212223</color>
+    <color name="app_background_light">#B9B9B9</color>
+    <color name="card_background_light">#F5F5F5</color>
+    <color name="color_deadpool">#750408</color>
+    <color name="color_ironman">#98151A</color>
+    <color name="color_captainamerica">#3E4FB5</color>
+    <color name="color_spiderman">#98151A</color>
+    <color name="color_doctorstrange">#077A52</color>
+    <color name="color_thor">#0B82BC</color>
+    <color name="color_thanos">#6C10C5</color>
 </resources>
