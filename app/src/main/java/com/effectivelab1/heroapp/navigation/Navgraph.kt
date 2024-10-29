@@ -1,18 +1,19 @@
 package com.effectivelab1.heroapp.navigation
 
-
-
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.NavHostController
 import com.effectivelab1.heroapp.model.Hero
 import com.effectivelab1.heroapp.ui.screens.heroInfoScreen.HeroDetailScreen
 import com.effectivelab1.heroapp.ui.screens.mainScreen.HeroListScreen
 import com.google.gson.Gson
 
 @Composable
-fun NavGraph(navController: NavHostController, onItemChanged: (Int) -> Unit) {
+fun NavGraph(
+    navController: NavHostController,
+    onItemChanged: (Int) -> Unit,
+) {
     val gson = Gson()
     NavHost(navController = navController, startDestination = "heroList") {
         composable("heroList") {

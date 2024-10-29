@@ -29,13 +29,30 @@ object DataProvider {
                             "id" -> hero.id = parser.text
                             "name" ->
                                 hero.name =
-                                    context.getString(context.resources.getIdentifier(parser.text, "string", context.packageName))
+                                    context.getString(
+                                        context.resources.getIdentifier(
+                                            parser.text,
+                                            "string",
+                                            context.packageName,
+                                        ),
+                                    )
                             "imageUrl" -> hero.imageUrl = parser.text
                             "description" ->
                                 hero.description =
-                                    context.getString(context.resources.getIdentifier(parser.text, "string", context.packageName))
+                                    context.getString(
+                                        context.resources.getIdentifier(
+                                            parser.text,
+                                            "string",
+                                            context.packageName,
+                                        ),
+                                    )
                             "color" -> {
-                                val colorId = context.resources.getIdentifier(parser.text.substring(1), "color", context.packageName)
+                                val colorId =
+                                    context.resources.getIdentifier(
+                                        parser.text.substring(1),
+                                        "color",
+                                        context.packageName,
+                                    )
                                 hero.colorResourceId = colorId
                                 hero.color = Color(context.getColor(colorId))
                             }

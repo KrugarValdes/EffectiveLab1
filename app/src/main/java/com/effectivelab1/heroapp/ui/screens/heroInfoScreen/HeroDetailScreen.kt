@@ -1,6 +1,11 @@
 package com.effectivelab1.heroapp.ui.screens.heroInfoScreen
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Icon
@@ -13,11 +18,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.effectivelab1.heroapp.constants.Constants
+import com.effectivelab1.heroapp.constants.Constants.iconButtonPaddingStart
+import com.effectivelab1.heroapp.constants.Constants.sizeIconArrowBack
 import com.effectivelab1.heroapp.model.Hero
 import com.effectivelab1.heroapp.ui.components.HeroImage
-import com.effectivelab1.heroapp.ui.theme.Constants
-import com.effectivelab1.heroapp.ui.theme.Constants.iconButtonPaddingStart
-import com.effectivelab1.heroapp.ui.theme.Constants.sizeIconArrowBack
 
 @Composable
 fun HeroDetailScreen(
@@ -34,22 +39,26 @@ fun HeroDetailScreen(
 }
 
 @Composable
-private fun DisplayHeroImage(imageUrl: String, contentDescription: String) {
+private fun DisplayHeroImage(
+    imageUrl: String,
+    contentDescription: String,
+) {
     HeroImage(
         imageUrl = imageUrl,
         contentDescription = contentDescription,
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
     )
 }
 
 @Composable
 private fun HeroInformation(currentHero: Hero?) {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(bottom = Constants.heroInfoBottomPadding, start = Constants.heroInfoStartPadding),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(bottom = Constants.heroInfoBottomPadding, start = Constants.heroInfoStartPadding),
         verticalArrangement = Arrangement.Bottom,
-        horizontalAlignment = Alignment.Start
+        horizontalAlignment = Alignment.Start,
     ) {
         HeroName(name = currentHero?.name ?: "Unknown Hero")
         HeroDescription(description = currentHero?.description ?: "No description available.")
@@ -64,7 +73,7 @@ private fun HeroName(name: String) {
         fontFamily = Constants.interFontFamily,
         fontWeight = FontWeight.ExtraBold,
         color = Color.White,
-        modifier = Modifier.padding(bottom = 8.dp)
+        modifier = Modifier.padding(bottom = 8.dp),
     )
 }
 
@@ -76,26 +85,27 @@ private fun HeroDescription(description: String) {
         lineHeight = Constants.heroDescriptionLineHeight,
         fontFamily = Constants.interFontFamily,
         fontWeight = FontWeight.ExtraBold,
-        color = Color.White
+        color = Color.White,
     )
 }
 
 @Composable
 private fun NavigationBackButton(
     navigator: NavController,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     IconButton(
         onClick = { navigator.popBackStack() },
-        modifier = modifier
-            .padding(iconButtonPaddingStart)
-            .size(sizeIconArrowBack)
+        modifier =
+            modifier
+                .padding(iconButtonPaddingStart)
+                .size(sizeIconArrowBack),
     ) {
         Icon(
             modifier = Modifier.size(sizeIconArrowBack),
             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
             contentDescription = "Back",
-            tint = Color.White
+            tint = Color.White,
         )
     }
 }

@@ -12,27 +12,36 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
+import com.effectivelab1.heroapp.constants.Constants
 
+@Suppress("ktlint:standard:function-naming")
 @Composable
 fun HeroBackgroundTriangle(selectedColor: Color) {
-    val animatedColor = animateColorAsState(targetValue = selectedColor, animationSpec = tween(600))
+    val animatedColor =
+        animateColorAsState(
+            targetValue = selectedColor,
+            animationSpec = tween(Constants.screenTriangleDuration),
+            label = "SelectedColorAnimation",
+        )
 
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Bottom,
     ) {
         Canvas(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(0.6f),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(Constants.screenTriangleSize),
         ) {
             drawPath(
-                path = Path().apply {
-                    moveTo(size.width, size.height)
-                    lineTo(0f, size.height)
-                    lineTo(size.width, 0f)
-                    close()
-                },
+                path =
+                    Path().apply {
+                        moveTo(size.width, size.height)
+                        lineTo(0f, size.height)
+                        lineTo(size.width, 0f)
+                        close()
+                    },
                 color = animatedColor.value,
             )
         }

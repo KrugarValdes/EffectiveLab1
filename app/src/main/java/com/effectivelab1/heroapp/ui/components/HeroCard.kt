@@ -20,33 +20,35 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.effectivelab1.heroapp.R
+import com.effectivelab1.heroapp.constants.Constants
 import com.effectivelab1.heroapp.model.Hero
-import com.effectivelab1.heroapp.ui.theme.Constants
 
 @Composable
 fun HeroCard(
     hero: Hero,
     onClick: () -> Unit,
     scale: Float,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Card(
-        modifier = modifier
-            .size((Constants.heroCardWidth.value * scale).dp,
-                (Constants.heroCardHeight.value * scale).dp)
-            .shadow(
-                elevation = Constants.heroCardShadowElevation,
-                shape = RoundedCornerShape(Constants.heroCardCornerShape),
-                clip = true,
-            )
-            .clip(RoundedCornerShape(Constants.heroCardCornerShape))
-            .background(colorResource(id = R.color.card_background))
-            .clickable { onClick() }
+        modifier =
+            modifier
+                .size(
+                    (Constants.heroCardWidth.value * scale).dp,
+                    (Constants.heroCardHeight.value * scale).dp,
+                ).shadow(
+                    elevation = Constants.heroCardShadowElevation,
+                    shape = RoundedCornerShape(Constants.heroCardCornerShape),
+                    clip = true,
+                ).clip(RoundedCornerShape(Constants.heroCardCornerShape))
+                .background(colorResource(id = R.color.card_background))
+                .clickable { onClick() },
     ) {
         Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(colorResource(id = R.color.card_background)),
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .background(colorResource(id = R.color.card_background)),
             contentAlignment = Alignment.BottomStart,
         ) {
             HeroImage(
@@ -61,9 +63,12 @@ fun HeroCard(
                 fontFamily = Constants.interFontFamily,
                 fontWeight = FontWeight.ExtraBold,
                 color = Color.White,
-                modifier = Modifier
-                    .padding(start = (Constants.heroCardTextStartPadding.value * scale).dp,
-                        bottom = (Constants.heroCardTextBottomPadding.value * scale).dp),
+                modifier =
+                    Modifier
+                        .padding(
+                            start = (Constants.heroCardTextStartPadding.value * scale).dp,
+                            bottom = (Constants.heroCardTextBottomPadding.value * scale).dp,
+                        ),
             )
         }
     }

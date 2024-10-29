@@ -12,27 +12,24 @@ import com.effectivelab1.heroapp.R
 @Composable
 fun HeroAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
-    val colors = if (darkTheme) {
-        darkColorScheme(
-            primary = colorResource(id = R.color.color_deadpool),
-            secondary = colorResource(id = R.color.color_ironman),
-            background = colorResource(id = R.color.app_background),
-            onSecondary = colorResource(id = R.color.white)
-        )
-    } else {
-        lightColorScheme(
-            primary = colorResource(id = R.color.color_spiderman),
-            secondary = colorResource(id = R.color.color_captainamerica),
-            background = colorResource(id = R.color.app_background_light),
-            onSecondary = Color.Black
-        )
-    }
+    val colors =
+        if (darkTheme) {
+            darkColorScheme(
+                background = colorResource(id = R.color.app_background),
+                onSecondary = colorResource(id = R.color.white),
+            )
+        } else {
+            lightColorScheme(
+                background = colorResource(id = R.color.app_background_light),
+                onSecondary = Color.Black,
+            )
+        }
 
     MaterialTheme(
         colorScheme = colors,
         typography = Typography,
-        content = content
+        content = content,
     )
 }

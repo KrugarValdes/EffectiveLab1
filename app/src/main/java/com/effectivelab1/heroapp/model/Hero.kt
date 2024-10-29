@@ -8,5 +8,5 @@ data class Hero(
     var imageUrl: String,
     var description: String,
     var colorResourceId: Int, // ID ресурса цвета
-    var color: Color, // Поле для хранения цвета
+    var color: Color, // Хранение цвета
 )

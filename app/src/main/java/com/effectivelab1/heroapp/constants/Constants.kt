@@ -1,4 +1,4 @@
-package com.effectivelab1.heroapp.ui.theme
+package com.effectivelab1.heroapp.constants
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.ui.text.font.Font
@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.sp
 import com.effectivelab1.heroapp.R
 
 object Constants {
-    //ListScreen
+    // ListScreen
     val heroListCardHeight = 500.dp
     val horizontalPadding = 40.dp
     val spacerBetweenItems = 20.dp
@@ -19,7 +19,10 @@ object Constants {
     val screenTitleFontSize = 28.sp
     val screenTitleTopPadding = 40.dp
     val screenTitleBottomPadding = 60.dp
-    //DetailScreem
+    val screenTriangleSize = 0.6f
+    val screenTriangleDuration = 600
+
+    // DetailScreem
     val iconButtonPadding = 16.dp
     val heroInfoBottomPadding = 45.dp
     val heroInfoStartPadding = 10.dp
@@ -28,7 +31,8 @@ object Constants {
     val heroDescriptionLineHeight = 30.sp
     val iconButtonPaddingStart = PaddingValues(start = 25.dp, top = 35.dp)
     val sizeIconArrowBack = DpSize(30.dp, 30.dp)
-    //HeroCard
+
+    // HeroCard
     val heroCardWidth = 300.dp
     val heroCardHeight = 500.dp
     val heroCardShadowElevation = 8.dp
@@ -38,9 +42,9 @@ object Constants {
     val heroCardTextBottomPadding = 30.dp
 
     // Font
-    val interFontFamily = FontFamily(
-        Font(R.font.inter_extrabold, FontWeight.ExtraBold),
-        Font(R.font.inter_bold, FontWeight.Bold)
-    )
+    val interFontFamily =
+        FontFamily(
+            Font(R.font.inter_extrabold, FontWeight.ExtraBold),
+            Font(R.font.inter_bold, FontWeight.Bold),
+        )
 }
-
