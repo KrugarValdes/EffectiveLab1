@@ -3,6 +3,7 @@ package com.effectivelab1.heroapp.ui.screens.mainScreen
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -31,6 +32,7 @@ fun HeroListCard(
     onItemChanged: (Int) -> Unit,
 ) {
     val lazyListState = rememberLazyListState()
+    val snapFlingBehavior = rememberSnapFlingBehavior(lazyListState)
     val currentItem by remember {
         derivedStateOf {
             lazyListState.layoutInfo.visibleItemsInfo
@@ -41,11 +43,11 @@ fun HeroListCard(
 
     LaunchedEffect(currentItem) {
         onItemChanged(currentItem)
-        lazyListState.animateScrollToItem(currentItem)
     }
 
     LazyRow(
         state = lazyListState,
+        flingBehavior = snapFlingBehavior,
         modifier =
             Modifier
                 .fillMaxWidth()
@@ -55,7 +57,7 @@ fun HeroListCard(
     ) {
         itemsIndexed(heroesList) { index, hero ->
             val scale by animateFloatAsState(
-                targetValue = if (index == currentItem) 1f else 0.8f,
+                targetValue = if (index == currentItem) 1f else 0.9f,
                 animationSpec =
                     tween(
                         durationMillis = 700,

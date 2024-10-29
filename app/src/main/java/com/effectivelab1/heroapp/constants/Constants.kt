@@ -11,19 +11,18 @@ import com.effectivelab1.heroapp.R
 
 object Constants {
     // ListScreen
-    val heroListCardHeight = 500.dp
+    val heroListCardHeight = 530.dp
     val horizontalPadding = 40.dp
     val spacerBetweenItems = 20.dp
     val marvelLogoWidth = 192.dp
     val marvelLogoHeight = 40.dp
     val screenTitleFontSize = 28.sp
     val screenTitleTopPadding = 40.dp
-    val screenTitleBottomPadding = 60.dp
+    val screenTitleBottomPadding = 80.dp
     val screenTriangleSize = 0.6f
     val screenTriangleDuration = 600
 
     // DetailScreem
-    val iconButtonPadding = 16.dp
     val heroInfoBottomPadding = 45.dp
     val heroInfoStartPadding = 10.dp
     val heroNameFontSize = 34.sp
@@ -33,8 +32,8 @@ object Constants {
     val sizeIconArrowBack = DpSize(30.dp, 30.dp)
 
     // HeroCard
-    val heroCardWidth = 300.dp
-    val heroCardHeight = 500.dp
+    val heroCardWidth = 320.dp
+    val heroCardHeight = 530.dp
     val heroCardShadowElevation = 8.dp
     val heroCardCornerShape = 16.dp
     val heroCardNameFontSize = 30.sp
