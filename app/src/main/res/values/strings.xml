@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Marvel Heroes</string>
+    <string name="choose_your_hero">Choose your hero</string>
+    <string name="marvel_logo_description">Marvel Logo</string>
+    <string name="hero_deadpool">Deadpool</string>
+    <string name="hero_deadpool_description">"Please don’t make the super suit green… or animated!"</string>
+    <string name="hero_spiderman">Spider Man</string>
+    <string name="hero_spiderman_description">"With great power, comes great responsibility."</string>
+    <string name="hero_ironman">Iron Man</string>
+    <string name="hero_ironman_description">"I AM IRON MAN."</string>
+    <string name="hero_captainamerica">Captain America</string>
+    <string name="hero_captainamerica_description">"I can do this all day."</string>
+    <string name="hero_doctorstrange">Doctor Strange</string>
+    <string name="hero_doctorstrange_description">"The bill comes due. Always."</string>
+    <string name="hero_thor">Thor</string>
+    <string name="hero_thor_description">"I am Thor, son of Odin!"</string>
+    <string name="hero_thanos">Thanos</string>
+    <string name="hero_thanos_description">"Perfectly balanced, as all things should be."</string>
+</resources>
