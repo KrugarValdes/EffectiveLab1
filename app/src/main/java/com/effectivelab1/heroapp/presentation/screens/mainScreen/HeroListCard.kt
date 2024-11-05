@@ -21,23 +21,22 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.effectivelab1.heroapp.constants.Constants
-import com.effectivelab1.heroapp.model.Hero
+import com.effectivelab1.heroapp.presentation.models.MarvelCharacter
 import com.effectivelab1.heroapp.ui.components.HeroCard
 import kotlin.math.abs
 
 @Composable
 fun HeroListCard(
-    heroesList: List<Hero>,
-    onHeroClick: (Hero) -> Unit,
-    onItemChanged: (Int) -> Unit,
+    heroesList: List<MarvelCharacter>,
+    onHeroClick: (MarvelCharacter) -> Unit,
+    onItemChanged: (Int) -> Unit
 ) {
     val lazyListState = rememberLazyListState()
     val snapFlingBehavior = rememberSnapFlingBehavior(lazyListState)
+
     val currentItem by remember {
         derivedStateOf {
-            lazyListState.layoutInfo.visibleItemsInfo
-                .minByOrNull { abs(it.offset) }
-                ?.index ?: 0
+            lazyListState.layoutInfo.visibleItemsInfo.minByOrNull { abs(it.offset) }?.index ?: 0
         }
     }
 
@@ -48,32 +47,26 @@ fun HeroListCard(
     LazyRow(
         state = lazyListState,
         flingBehavior = snapFlingBehavior,
-        modifier =
-            Modifier
-                .fillMaxWidth()
-                .height(Constants.heroListCardHeight),
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(Constants.heroListCardHeight),
         contentPadding = PaddingValues(horizontal = Constants.horizontalPadding),
-        horizontalArrangement = Arrangement.spacedBy(Constants.spacerBetweenItems),
+        horizontalArrangement = Arrangement.spacedBy(Constants.spacerBetweenItems)
     ) {
         itemsIndexed(heroesList) { index, hero ->
             val scale by animateFloatAsState(
                 targetValue = if (index == currentItem) 1f else 0.9f,
-                animationSpec =
-                    tween(
-                        durationMillis = 700,
-                        easing = LinearOutSlowInEasing,
-                    ),
-                label = "ScaleAnimation",
+                animationSpec = tween(durationMillis = 700, easing = LinearOutSlowInEasing)
             )
 
             Box(
                 modifier = Modifier.fillMaxHeight(),
-                contentAlignment = Alignment.Center,
+                contentAlignment = Alignment.Center
             ) {
                 HeroCard(
                     hero = hero,
                     scale = scale,
-                    onClick = { onHeroClick(hero) },
+                    onClick = { onHeroClick(hero) }
                 )
             }
         }

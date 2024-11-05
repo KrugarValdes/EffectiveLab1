@@ -1,4 +1,4 @@
-package com.effectivelab1.heroapp.ui.screens.mainScreen
+package com.effectivelab1.heroapp.presentation.screens.mainScreen
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween

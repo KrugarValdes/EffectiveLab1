@@ -1,5 +1,6 @@
-package com.effectivelab1.heroapp.ui.screens.heroInfoScreen
+package com.effectivelab1.heroapp.presentation.screens.heroInfoScreen
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,47 +22,45 @@ import androidx.navigation.NavController
 import com.effectivelab1.heroapp.constants.Constants
 import com.effectivelab1.heroapp.constants.Constants.iconButtonPaddingStart
 import com.effectivelab1.heroapp.constants.Constants.sizeIconArrowBack
-import com.effectivelab1.heroapp.model.Hero
-import com.effectivelab1.heroapp.ui.components.HeroImage
+import com.effectivelab1.heroapp.presentation.components.HeroImage
+import com.effectivelab1.heroapp.presentation.models.MarvelCharacter
 
 @Composable
 fun HeroDetailScreen(
-    currentHero: Hero?,
+    currentHero: MarvelCharacter?,
     navigator: NavController,
 ) {
-    Box(modifier = Modifier.fillMaxSize()) {
-        currentHero?.let { DisplayHeroImage(it.imageUrl, it.name) }
-        HeroInformation(currentHero)
-        NavigationBackButton(
-            navigator = navigator,
+    if (currentHero == null) { Box(modifier = Modifier.fillMaxSize()) {
+        Text(
+            text = "Loading...",
+            color = Color.Black,
+            modifier = Modifier.align(Alignment.Center)
         )
+    }
+    } else {
+        Box(modifier = Modifier.fillMaxSize()) {
+            HeroImage(
+                imageUrl = currentHero.imageUrl,
+                contentDescription = currentHero.name,
+                modifier = Modifier.fillMaxSize()
+            )
+            HeroInformation(currentHero)
+            NavigationBackButton(navigator = navigator)
+        }
     }
 }
 
 @Composable
-private fun DisplayHeroImage(
-    imageUrl: String,
-    contentDescription: String,
-) {
-    HeroImage(
-        imageUrl = imageUrl,
-        contentDescription = contentDescription,
-        modifier = Modifier.fillMaxSize(),
-    )
-}
-
-@Composable
-private fun HeroInformation(currentHero: Hero?) {
+private fun HeroInformation(currentHero: MarvelCharacter) {
     Column(
-        modifier =
-            Modifier
-                .fillMaxSize()
-                .padding(bottom = Constants.heroInfoBottomPadding, start = Constants.heroInfoStartPadding),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(bottom = Constants.heroInfoBottomPadding, start = Constants.heroInfoStartPadding),
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.Start,
     ) {
-        HeroName(name = currentHero?.name ?: "Unknown Hero")
-        HeroDescription(description = currentHero?.description ?: "No description available.")
+        HeroName(name = currentHero.name)
+        HeroDescription(description = currentHero.description.ifEmpty { "No description available." })
     }
 }
 
@@ -73,7 +72,7 @@ private fun HeroName(name: String) {
         fontFamily = Constants.interFontFamily,
         fontWeight = FontWeight.ExtraBold,
         color = Color.White,
-        modifier = Modifier.padding(bottom = 8.dp),
+        modifier = Modifier.padding(bottom = Constants.heroNameBottomPadding),
     )
 }
 
@@ -96,13 +95,11 @@ private fun NavigationBackButton(
 ) {
     IconButton(
         onClick = { navigator.popBackStack() },
-        modifier =
-            modifier
-                .padding(iconButtonPaddingStart)
-                .size(sizeIconArrowBack),
+        modifier = modifier
+            .padding(iconButtonPaddingStart)
+            .size(sizeIconArrowBack),
     ) {
         Icon(
-            modifier = Modifier.size(sizeIconArrowBack),
             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
             contentDescription = "Back",
             tint = Color.White,
