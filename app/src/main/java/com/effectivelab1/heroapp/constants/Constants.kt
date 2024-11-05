@@ -1,6 +1,7 @@
 package com.effectivelab1.heroapp.constants
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -21,6 +22,8 @@ object Constants {
     val screenTitleBottomPadding = 80.dp
     val screenTriangleSize = 0.6f
     val screenTriangleDuration = 600
+    val errorMessageFontSize = 22.sp
+    val errorMessagePadding = 16.dp
 
     // DetailScreem
     val heroInfoBottomPadding = 45.dp
@@ -28,8 +31,9 @@ object Constants {
     val heroNameFontSize = 34.sp
     val heroDescriptionFontSize = 22.sp
     val heroDescriptionLineHeight = 30.sp
-    val iconButtonPaddingStart = PaddingValues(start = 25.dp, top = 35.dp)
-    val sizeIconArrowBack = DpSize(30.dp, 30.dp)
+    val iconButtonPaddingStart = PaddingValues(start = 25.dp, top = 45.dp)
+    val sizeIconArrowBack = DpSize(40.dp, 40.dp)
+    val heroNameBottomPadding = 8.dp
 
     // HeroCard
     val heroCardWidth = 320.dp

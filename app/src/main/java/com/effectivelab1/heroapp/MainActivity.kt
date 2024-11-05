@@ -7,7 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.rememberNavController
 import com.effectivelab1.heroapp.navigation.NavGraph
-import com.effectivelab1.heroapp.ui.theme.HeroAppTheme
+import com.effectivelab1.heroapp.presentation.theme.HeroAppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

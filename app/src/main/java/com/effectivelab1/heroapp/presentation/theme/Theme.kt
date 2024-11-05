@@ -1,4 +1,4 @@
-package com.effectivelab1.heroapp.ui.theme
+package com.effectivelab1.heroapp.presentation.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
