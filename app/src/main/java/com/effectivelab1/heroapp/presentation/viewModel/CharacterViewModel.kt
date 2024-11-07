@@ -1,13 +1,12 @@
 package com.effectivelab1.heroapp.presentation.viewModel
 
 
-import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
-
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.effectivelab1.heroapp.constants.ApiKeys
 import com.effectivelab1.heroapp.network.MarvelRepository
 import com.effectivelab1.heroapp.presentation.models.MarvelCharacter
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -33,9 +32,7 @@ class CharacterViewModel : ViewModel() {
     private val _selectedHero = MutableStateFlow<MarvelCharacter?>(null)
     val selectedHero: StateFlow<MarvelCharacter?> get() = _selectedHero
 
-    private val _isLoading = mutableStateOf(false)
-    val isLoading: State<Boolean> get() = _isLoading
-
+    private var isLoading = false
     private var currentOffset = 0
 
     init {
@@ -43,16 +40,24 @@ class CharacterViewModel : ViewModel() {
     }
 
     private fun loadHeroes() {
+        if (isLoading) return
+        isLoading = true
         viewModelScope.launch {
             try {
                 val newHeroes = repository.getCharacters(currentOffset)
                 _heroes.value = _heroes.value + newHeroes
+                currentOffset += ApiKeys.LIMIT
             } catch (e: Exception) {
                 _errorMessage.value = "Failed to load heroes: ${e.message}"
+            } finally {
+                isLoading = false
             }
         }
     }
 
+    fun onListScrolledToEnd() {
+        loadHeroes()
+    }
 
     fun loadHeroById(heroId: Int) {
         viewModelScope.launch {

@@ -22,7 +22,7 @@ import androidx.navigation.NavController
 import com.effectivelab1.heroapp.constants.Constants
 import com.effectivelab1.heroapp.constants.Constants.iconButtonPaddingStart
 import com.effectivelab1.heroapp.constants.Constants.sizeIconArrowBack
-import com.effectivelab1.heroapp.presentation.components.HeroImage
+import com.effectivelab1.heroapp.presentation.components.ImageLoader
 import com.effectivelab1.heroapp.presentation.models.MarvelCharacter
 
 @Composable
@@ -39,7 +39,7 @@ fun HeroDetailScreen(
     }
     } else {
         Box(modifier = Modifier.fillMaxSize()) {
-            HeroImage(
+            ImageLoader(
                 imageUrl = currentHero.imageUrl,
                 contentDescription = currentHero.name,
                 modifier = Modifier.fillMaxSize()

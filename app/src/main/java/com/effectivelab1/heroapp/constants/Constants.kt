@@ -43,6 +43,7 @@ object Constants {
     val heroCardNameFontSize = 30.sp
     val heroCardTextStartPadding = 25.dp
     val heroCardTextBottomPadding = 30.dp
+    val cardAnimationDuration = 700
 
     // Font
     val interFontFamily =

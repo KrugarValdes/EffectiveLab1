@@ -14,9 +14,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import com.effectivelab1.heroapp.constants.Constants
 
-@Suppress("ktlint:standard:function-naming")
+
 @Composable
-fun HeroBackgroundTriangle(selectedColor: Color) {
+fun BackgroundTriangle(selectedColor: Color) {
     val animatedColor =
         animateColorAsState(
             targetValue = selectedColor,

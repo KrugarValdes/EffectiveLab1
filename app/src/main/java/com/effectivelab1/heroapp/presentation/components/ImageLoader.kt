@@ -1,5 +1,4 @@
 package com.effectivelab1.heroapp.presentation.components
-
 import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -7,7 +6,7 @@ import androidx.compose.ui.layout.ContentScale
 import coil.compose.AsyncImage
 
 @Composable
-fun HeroImage(
+fun ImageLoader(
     imageUrl: String?,
     contentDescription: String?,
     modifier: Modifier = Modifier,

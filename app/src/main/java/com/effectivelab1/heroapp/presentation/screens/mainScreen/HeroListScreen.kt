@@ -18,11 +18,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.effectivelab1.heroapp.R
 import com.effectivelab1.heroapp.constants.Constants
-import com.effectivelab1.heroapp.presentation.screens.mainScreen.HeroBackgroundTriangle
+import com.effectivelab1.heroapp.presentation.models.MarvelCharacter
+import com.effectivelab1.heroapp.presentation.screens.mainScreen.BackgroundTriangle
 import com.effectivelab1.heroapp.presentation.viewModel.CharacterViewModel
 
 @Composable
@@ -33,13 +33,14 @@ fun HeroListScreen(
 ) {
     val heroesList = viewModel.heroes.collectAsState().value
     val selectedColor = viewModel.triangleColor
+    val errorMessage = viewModel.errorMessage.value
 
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background),
     ) {
-        HeroBackgroundTriangle(selectedColor)
+        BackgroundTriangle(selectedColor)
 
         Column(
             modifier = Modifier
@@ -49,27 +50,13 @@ fun HeroListScreen(
         ) {
             MarvelLogo()
             ScreenTitle()
-            if (viewModel.errorMessage.value != null) {
-                Text(
-                    text = viewModel.errorMessage.value!!,
-                    color = Color.White,
-                    fontSize = Constants.errorMessageFontSize,
-                    fontFamily = Constants.interFontFamily,
-                    fontWeight = FontWeight.ExtraBold,
-                    modifier = Modifier.padding(Constants.errorMessagePadding))
-            } else {
-                HeroListCard(
-                    heroesList = heroesList,
-                    onHeroClick = { hero ->
-                        viewModel.resetSelectedHero()
-                        navController.navigate("hero_details/${hero.id}")
-                    },
-                    onItemChanged = { index ->
-                        viewModel.selectHero(index)
-                        onItemChanged(index)
-                    },
-                )
-            }
+            ErrorMessage(errorMessage)
+            HeroListContent(
+                heroesList = heroesList,
+                navController = navController,
+                viewModel = viewModel,
+                onItemChanged = onItemChanged
+            )
         }
     }
 }
@@ -97,5 +84,40 @@ fun ScreenTitle() {
             top = Constants.screenTitleTopPadding,
             bottom = Constants.screenTitleBottomPadding,
         ),
+    )
+}
+
+@Composable
+fun ErrorMessage(errorMessage: String?) {
+    if (errorMessage != null) {
+        Text(
+            text = errorMessage,
+            color = Color.White,
+            fontSize = Constants.errorMessageFontSize,
+            fontFamily = Constants.interFontFamily,
+            fontWeight = FontWeight.ExtraBold,
+            modifier = Modifier.padding(Constants.errorMessagePadding)
+        )
+    }
+}
+
+@Composable
+fun HeroListContent(
+    heroesList: List<MarvelCharacter>,
+    navController: NavController,
+    viewModel: CharacterViewModel,
+    onItemChanged: (Int) -> Unit,
+) {
+    HeroListCard(
+        heroesList = heroesList,
+        onHeroClick = { hero ->
+            viewModel.resetSelectedHero()
+            navController.navigate("hero_details/${hero.id}")
+        },
+        onItemChanged = { index ->
+            viewModel.selectHero(index)
+            onItemChanged(index)
+        },
+        onScrolledToEnd = { viewModel.onListScrolledToEnd() }
     )
 }

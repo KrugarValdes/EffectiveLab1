@@ -1,4 +1,4 @@
-package com.effectivelab1.heroapp.ui.components
+package com.effectivelab1.heroapp.presentation.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -21,7 +21,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.effectivelab1.heroapp.R
 import com.effectivelab1.heroapp.constants.Constants
-import com.effectivelab1.heroapp.presentation.components.HeroImage
 import com.effectivelab1.heroapp.presentation.models.MarvelCharacter
 
 @Composable
@@ -54,7 +53,7 @@ fun HeroCard(
                 .background(backgroundColor),
             contentAlignment = Alignment.BottomStart,
         ) {
-            HeroImage(
+            ImageLoader(
                 imageUrl = hero.imageUrl,
                 contentDescription = hero.name,
                 modifier = Modifier.fillMaxSize(),
