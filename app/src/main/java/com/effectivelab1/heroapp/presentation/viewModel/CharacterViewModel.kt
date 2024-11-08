@@ -1,6 +1,5 @@
 package com.effectivelab1.heroapp.presentation.viewModel
 
-
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
@@ -13,7 +12,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlin.random.Random
-
 
 class CharacterViewModel : ViewModel() {
     private val repository = MarvelRepository()
@@ -85,7 +83,7 @@ class CharacterViewModel : ViewModel() {
             red = random.nextFloat(),
             green = random.nextFloat(),
             blue = random.nextFloat(),
-            alpha = 1f
+            alpha = 1f,
         )
     }
 }

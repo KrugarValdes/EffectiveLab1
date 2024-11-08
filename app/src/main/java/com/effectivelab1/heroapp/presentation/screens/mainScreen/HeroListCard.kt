@@ -32,13 +32,13 @@ fun HeroListCard(
     heroesList: List<MarvelCharacter>,
     onHeroClick: (MarvelCharacter) -> Unit,
     onItemChanged: (Int) -> Unit,
-    onScrolledToEnd: () -> Unit
+    onScrolledToEnd: () -> Unit,
 ) {
     val lazyListState = rememberLazyListState()
     val snapFlingBehavior = rememberSnapFlingBehavior(lazyListState)
 
     val currentItem by rememberUpdatedState(
-        newValue = getCurrentVisibleItem(lazyListState)
+        newValue = getCurrentVisibleItem(lazyListState),
     )
 
     LaunchedEffect(currentItem) {
@@ -52,17 +52,18 @@ fun HeroListCard(
     LazyRow(
         state = lazyListState,
         flingBehavior = snapFlingBehavior,
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxWidth()
             .height(Constants.heroListCardHeight),
         contentPadding = PaddingValues(horizontal = Constants.horizontalPadding),
-        horizontalArrangement = Arrangement.spacedBy(Constants.spacerBetweenItems)
+        horizontalArrangement = Arrangement.spacedBy(Constants.spacerBetweenItems),
     ) {
         itemsIndexed(heroesList) { index, hero ->
             HeroItem(
                 hero = hero,
                 isSelected = index == currentItem,
-                onHeroClick = { onHeroClick(hero) }
+                onHeroClick = { onHeroClick(hero) },
             )
         }
     }
@@ -72,35 +73,34 @@ fun HeroListCard(
 fun HeroItem(
     hero: MarvelCharacter,
     isSelected: Boolean,
-    onHeroClick: () -> Unit
+    onHeroClick: () -> Unit,
 ) {
     val scale by animateFloatAsState(
         targetValue = if (isSelected) 1f else 0.9f,
-        animationSpec = tween(durationMillis = cardAnimationDuration, easing = LinearOutSlowInEasing)
+        animationSpec = tween(durationMillis = cardAnimationDuration, easing = LinearOutSlowInEasing),
     )
 
     Box(
         modifier = Modifier.fillMaxHeight(),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.Center,
     ) {
         HeroCard(
             hero = hero,
             scale = scale,
-            onClick = onHeroClick
+            onClick = onHeroClick,
         )
     }
 }
 
-fun getCurrentVisibleItem(lazyListState: LazyListState): Int {
-    return lazyListState.layoutInfo.visibleItemsInfo
+fun getCurrentVisibleItem(lazyListState: LazyListState): Int =
+    lazyListState.layoutInfo.visibleItemsInfo
         .minByOrNull { abs(it.offset) }
         ?.index ?: 0
-}
 
 suspend fun onListScrolledToEnd(
     lazyListState: LazyListState,
     totalItems: Int,
-    onScrolledToEnd: () -> Unit
+    onScrolledToEnd: () -> Unit,
 ) {
     snapshotFlow { lazyListState.layoutInfo }
         .collect { layoutInfo ->

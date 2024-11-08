@@ -1,6 +1,5 @@
 package com.effectivelab1.heroapp.presentation.screens.heroInfoScreen
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,9 +14,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.effectivelab1.heroapp.constants.Constants
 import com.effectivelab1.heroapp.constants.Constants.iconButtonPaddingStart
@@ -30,19 +32,21 @@ fun HeroDetailScreen(
     currentHero: MarvelCharacter?,
     navigator: NavController,
 ) {
-    if (currentHero == null) { Box(modifier = Modifier.fillMaxSize()) {
-        Text(
-            text = "Loading...",
-            color = Color.Black,
-            modifier = Modifier.align(Alignment.Center)
-        )
-    }
+    if (currentHero == null) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            NavigationBackButton(navigator = navigator)
+            Text(
+                text = "Loading...",
+                color = Color.Black,
+                modifier = Modifier.align(Alignment.Center),
+            )
+        }
     } else {
         Box(modifier = Modifier.fillMaxSize()) {
             ImageLoader(
                 imageUrl = currentHero.imageUrl,
                 contentDescription = currentHero.name,
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier.fillMaxSize(),
             )
             HeroInformation(currentHero)
             NavigationBackButton(navigator = navigator)
@@ -53,7 +57,8 @@ fun HeroDetailScreen(
 @Composable
 private fun HeroInformation(currentHero: MarvelCharacter) {
     Column(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxSize()
             .padding(bottom = Constants.heroInfoBottomPadding, start = Constants.heroInfoStartPadding),
         verticalArrangement = Arrangement.Bottom,
@@ -72,6 +77,15 @@ private fun HeroName(name: String) {
         fontFamily = Constants.interFontFamily,
         fontWeight = FontWeight.ExtraBold,
         color = Color.White,
+        style =
+        TextStyle(
+            shadow =
+            Shadow(
+                color = Color.Black,
+                offset = Offset(2f, 2f),
+                blurRadius = 4f
+            )
+        ),
         modifier = Modifier.padding(bottom = Constants.heroNameBottomPadding),
     )
 }
@@ -85,6 +99,15 @@ private fun HeroDescription(description: String) {
         fontFamily = Constants.interFontFamily,
         fontWeight = FontWeight.ExtraBold,
         color = Color.White,
+        style =
+        TextStyle(
+            shadow =
+            Shadow(
+                color = Color.Black,
+                offset = Offset(2f, 2f),
+                blurRadius = 4f
+            )
+        )
     )
 }
 
@@ -95,14 +118,15 @@ private fun NavigationBackButton(
 ) {
     IconButton(
         onClick = { navigator.popBackStack() },
-        modifier = modifier
+        modifier =
+        modifier
             .padding(iconButtonPaddingStart)
             .size(sizeIconArrowBack),
     ) {
         Icon(
             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
             contentDescription = "Back",
-            tint = Color.White,
+            tint = Color.LightGray,
         )
     }
 }

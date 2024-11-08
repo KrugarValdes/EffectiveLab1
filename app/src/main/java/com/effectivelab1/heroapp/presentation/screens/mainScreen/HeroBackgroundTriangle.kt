@@ -14,7 +14,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import com.effectivelab1.heroapp.constants.Constants
 
-
 @Composable
 fun BackgroundTriangle(selectedColor: Color) {
     val animatedColor =
@@ -30,18 +29,18 @@ fun BackgroundTriangle(selectedColor: Color) {
     ) {
         Canvas(
             modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight(Constants.screenTriangleSize),
+            Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(Constants.screenTriangleSize),
         ) {
             drawPath(
                 path =
-                    Path().apply {
-                        moveTo(size.width, size.height)
-                        lineTo(0f, size.height)
-                        lineTo(size.width, 0f)
-                        close()
-                    },
+                Path().apply {
+                    moveTo(size.width, size.height)
+                    lineTo(0f, size.height)
+                    lineTo(size.width, 0f)
+                    close()
+                },
                 color = animatedColor.value,
             )
         }

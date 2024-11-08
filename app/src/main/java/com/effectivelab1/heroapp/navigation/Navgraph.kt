@@ -7,12 +7,9 @@ import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.effectivelab1.heroapp.presentation.models.MarvelCharacter
 import com.effectivelab1.heroapp.presentation.screens.heroInfoScreen.HeroDetailScreen
+import com.effectivelab1.heroapp.presentation.screens.mainScreen.HeroListScreen
 import com.effectivelab1.heroapp.presentation.viewModel.CharacterViewModel
-import com.effectivelab1.heroapp.ui.screens.mainScreen.HeroListScreen
-
-import com.google.gson.Gson
 
 @Composable
 fun NavGraph(
@@ -28,12 +25,10 @@ fun NavGraph(
         composable("hero_details/{heroId}") { backStackEntry ->
             val heroId = backStackEntry.arguments?.getString("heroId")?.toIntOrNull()
 
-            // Загружаем героя перед отображением экрана
             if (heroId != null) {
                 viewModel.loadHeroById(heroId)
             }
 
-            // Подписываемся на изменения состояния выбранного героя
             val hero by viewModel.selectedHero.collectAsState(initial = null)
 
             HeroDetailScreen(currentHero = hero, navigator = navController)

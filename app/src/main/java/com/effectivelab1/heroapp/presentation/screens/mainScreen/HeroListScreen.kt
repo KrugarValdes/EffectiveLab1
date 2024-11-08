@@ -1,4 +1,4 @@
-package com.effectivelab1.heroapp.ui.screens.mainScreen
+package com.effectivelab1.heroapp.presentation.screens.mainScreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -22,8 +22,8 @@ import androidx.navigation.NavController
 import com.effectivelab1.heroapp.R
 import com.effectivelab1.heroapp.constants.Constants
 import com.effectivelab1.heroapp.presentation.models.MarvelCharacter
-import com.effectivelab1.heroapp.presentation.screens.mainScreen.BackgroundTriangle
 import com.effectivelab1.heroapp.presentation.viewModel.CharacterViewModel
+import com.effectivelab1.heroapp.ui.screens.mainScreen.HeroListCard
 
 @Composable
 fun HeroListScreen(
@@ -36,14 +36,16 @@ fun HeroListScreen(
     val errorMessage = viewModel.errorMessage.value
 
     Box(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background),
     ) {
         BackgroundTriangle(selectedColor)
 
         Column(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .fillMaxSize()
                 .padding(bottom = Constants.screenTitleBottomPadding),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -55,7 +57,7 @@ fun HeroListScreen(
                 heroesList = heroesList,
                 navController = navController,
                 viewModel = viewModel,
-                onItemChanged = onItemChanged
+                onItemChanged = onItemChanged,
             )
         }
     }
@@ -66,7 +68,8 @@ fun MarvelLogo() {
     Image(
         painter = painterResource(R.drawable.marvel_logo),
         contentDescription = stringResource(R.string.marvel_logo_description),
-        modifier = Modifier
+        modifier =
+        Modifier
             .padding(top = Constants.screenTitleTopPadding)
             .width(Constants.marvelLogoWidth)
             .height(Constants.marvelLogoHeight),
@@ -80,7 +83,8 @@ fun ScreenTitle() {
         fontSize = Constants.screenTitleFontSize,
         color = Color.White,
         fontWeight = FontWeight.ExtraBold,
-        modifier = Modifier.padding(
+        modifier =
+        Modifier.padding(
             top = Constants.screenTitleTopPadding,
             bottom = Constants.screenTitleBottomPadding,
         ),
@@ -96,7 +100,7 @@ fun ErrorMessage(errorMessage: String?) {
             fontSize = Constants.errorMessageFontSize,
             fontFamily = Constants.interFontFamily,
             fontWeight = FontWeight.ExtraBold,
-            modifier = Modifier.padding(Constants.errorMessagePadding)
+            modifier = Modifier.padding(Constants.errorMessagePadding),
         )
     }
 }
@@ -118,6 +122,6 @@ fun HeroListContent(
             viewModel.selectHero(index)
             onItemChanged(index)
         },
-        onScrolledToEnd = { viewModel.onListScrolledToEnd() }
+        onScrolledToEnd = { viewModel.onListScrolledToEnd() },
     )
 }
