@@ -23,6 +23,10 @@ object Constants {
     val screenTriangleDuration = 600
     val errorMessageFontSize = 22.sp
     val errorMessagePadding = 16.dp
+    val reloadButtonSize = 26.dp
+    val reloadIconSize = 16.dp
+    val reloadButtonPaddingTop = 32.dp
+    val reloadButtonPaddingHorisontal = 16.dp
 
     // DetailScreem
     val heroInfoBottomPadding = 45.dp
@@ -40,7 +44,7 @@ object Constants {
     val heroCardShadowElevation = 8.dp
     val heroCardCornerShape = 16.dp
     val heroCardNameFontSize = 30.sp
-    val heroCardTextStartPadding = 25.dp
+    val heroCardTextPadding = 25.dp
     val heroCardTextBottomPadding = 30.dp
     val cardAnimationDuration = 700
 
