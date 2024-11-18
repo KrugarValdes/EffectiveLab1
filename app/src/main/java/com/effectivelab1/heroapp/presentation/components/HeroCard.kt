@@ -30,23 +30,21 @@ import com.effectivelab1.heroapp.presentation.models.MarvelCharacter
 fun HeroCard(
     hero: MarvelCharacter,
     onClick: () -> Unit,
-    scale: Float,
     modifier: Modifier = Modifier,
+    fontSize: Float,
+    textPadding: Float,
 ) {
     val cardShape = RoundedCornerShape(Constants.heroCardCornerShape)
     val backgroundColor = colorResource(id = R.color.card_background)
 
     Card(
-        modifier =
-        modifier
-            .size(
-                width = (Constants.heroCardWidth.value * scale).dp,
-                height = (Constants.heroCardHeight.value * scale).dp,
-            ).shadow(
+        modifier = modifier
+            .shadow(
                 elevation = Constants.heroCardShadowElevation,
                 shape = cardShape,
                 clip = true,
-            ).clip(cardShape)
+            )
+            .clip(cardShape)
             .clickable { onClick() },
     ) {
         Box(
@@ -64,7 +62,7 @@ fun HeroCard(
 
             Text(
                 text = hero.name,
-                fontSize = (Constants.heroCardNameFontSize.value * scale).sp,
+                fontSize = fontSize.sp,
                 fontFamily = Constants.interFontFamily,
                 fontWeight = FontWeight.ExtraBold,
                 color = Color.White,
@@ -74,14 +72,14 @@ fun HeroCard(
                     Shadow(
                         color = Color.Black,
                         offset = Offset(2f, 2f),
-                        blurRadius = 4f
+                        blurRadius = 4f,
                     )
                 ),
                 modifier =
                 Modifier
                     .padding(
-                        start = (Constants.heroCardTextStartPadding.value * scale).dp,
-                        bottom = (Constants.heroCardTextBottomPadding.value * scale).dp,
+                        start = textPadding.dp,
+                        bottom = textPadding.dp,
                     ),
             )
         }

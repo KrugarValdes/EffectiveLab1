@@ -7,6 +7,7 @@ import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.effectivelab1.heroapp.data.MarvelRepository
 import com.effectivelab1.heroapp.presentation.screens.heroInfoScreen.HeroDetailScreen
 import com.effectivelab1.heroapp.presentation.screens.mainScreen.HeroListScreen
 import com.effectivelab1.heroapp.presentation.viewModel.CharacterViewModel
@@ -14,24 +15,25 @@ import com.effectivelab1.heroapp.presentation.viewModel.CharacterViewModel
 @Composable
 fun NavGraph(
     navController: NavHostController,
+    viewModel: CharacterViewModel,
     onItemChanged: (Int) -> Unit,
 ) {
-    val viewModel: CharacterViewModel = remember { CharacterViewModel() }
-
     NavHost(navController = navController, startDestination = "heroList") {
         composable("heroList") {
-            HeroListScreen(navController = navController, viewModel = viewModel, onItemChanged = onItemChanged)
+            HeroListScreen(
+                navController = navController,
+                viewModel = viewModel,
+                onItemChanged = onItemChanged
+            )
         }
         composable("hero_details/{heroId}") { backStackEntry ->
             val heroId = backStackEntry.arguments?.getString("heroId")?.toIntOrNull()
 
-            if (heroId != null) {
-                viewModel.loadHeroById(heroId)
-            }
-
-            val hero by viewModel.selectedHero.collectAsState(initial = null)
-
-            HeroDetailScreen(currentHero = hero, navigator = navController)
+            HeroDetailScreen(
+                heroId = heroId,
+                viewModel = viewModel,
+                navigator = navController
+            )
         }
     }
 }

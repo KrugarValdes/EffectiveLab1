@@ -12,31 +12,43 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
+import com.effectivelab1.heroapp.R
 import com.effectivelab1.heroapp.constants.Constants
 import com.effectivelab1.heroapp.constants.Constants.iconButtonPaddingStart
 import com.effectivelab1.heroapp.constants.Constants.sizeIconArrowBack
 import com.effectivelab1.heroapp.presentation.components.ImageLoader
 import com.effectivelab1.heroapp.presentation.models.MarvelCharacter
+import com.effectivelab1.heroapp.presentation.viewModel.CharacterViewModel
 
 @Composable
 fun HeroDetailScreen(
-    currentHero: MarvelCharacter?,
+    heroId: Int?,
+    viewModel: CharacterViewModel,
     navigator: NavController,
 ) {
+
+    if (heroId != null) {
+        viewModel.loadHeroById(heroId)
+    }
+    val currentHero = viewModel.selectedHero.collectAsState(initial = null).value
+
     if (currentHero == null) {
         Box(modifier = Modifier.fillMaxSize()) {
             NavigationBackButton(navigator = navigator)
             Text(
-                text = "Loading...",
+                text = stringResource(R.string.loading_string),
                 color = Color.Black,
                 modifier = Modifier.align(Alignment.Center),
             )
