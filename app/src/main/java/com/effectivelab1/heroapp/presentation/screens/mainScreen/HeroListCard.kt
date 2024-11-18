@@ -25,7 +25,6 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.effectivelab1.heroapp.constants.Constants
 import com.effectivelab1.heroapp.presentation.components.HeroCard
 import com.effectivelab1.heroapp.presentation.models.MarvelCharacter
@@ -49,7 +48,10 @@ fun HeroListCard(
     val lastVisibleItemIndex = remember { mutableStateOf(-1) }
 
     LaunchedEffect(lazyListState.layoutInfo) {
-        val newLastVisibleItemIndex = lazyListState.layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: -1
+        val newLastVisibleItemIndex =
+            lazyListState.layoutInfo.visibleItemsInfo
+                .lastOrNull()
+                ?.index ?: -1
         val totalItemCount = heroesList.size
 
         if (newLastVisibleItemIndex != lastVisibleItemIndex.value) {
@@ -67,12 +69,11 @@ fun HeroListCard(
         state = lazyListState,
         flingBehavior = snapFlingBehavior,
         modifier =
-        Modifier
-            .fillMaxWidth()
-            .height(Constants.heroListCardHeight),
+            Modifier
+                .fillMaxWidth()
+                .height(Constants.heroListCardHeight),
         contentPadding = PaddingValues(horizontal = Constants.horizontalPadding),
         horizontalArrangement = Arrangement.spacedBy(Constants.spacerBetweenItems),
-
     ) {
         itemsIndexed(heroesList) { index, hero ->
             HeroItem(

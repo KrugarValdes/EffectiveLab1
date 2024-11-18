@@ -13,7 +13,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -38,7 +37,6 @@ fun HeroDetailScreen(
     viewModel: CharacterViewModel,
     navigator: NavController,
 ) {
-
     if (heroId != null) {
         viewModel.loadHeroById(heroId)
     }
@@ -95,8 +93,8 @@ private fun HeroName(name: String) {
             Shadow(
                 color = Color.Black,
                 offset = Offset(2f, 2f),
-                blurRadius = 4f
-            )
+                blurRadius = 4f,
+            ),
         ),
         modifier = Modifier.padding(bottom = Constants.heroNameBottomPadding),
     )
@@ -117,9 +115,9 @@ private fun HeroDescription(description: String) {
             Shadow(
                 color = Color.Black,
                 offset = Offset(2f, 2f),
-                blurRadius = 4f
-            )
-        )
+                blurRadius = 4f,
+            ),
+        ),
     )
 }
 

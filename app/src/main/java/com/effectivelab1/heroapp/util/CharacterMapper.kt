@@ -4,13 +4,12 @@ import com.effectivelab1.heroapp.data.MarvelCharacterEntity
 import com.effectivelab1.heroapp.presentation.models.MarvelCharacter
 import com.effectivelab1.heroapp.presentation.models.MarvelImage
 
-
 fun MarvelCharacter.toEntity(): MarvelCharacterEntity =
     MarvelCharacterEntity(
         id = this.id,
         name = this.name,
         description = this.description,
-        imageUrl = this.imageUrl
+        imageUrl = this.imageUrl,
     )
 
 fun MarvelCharacterEntity.toUI(): MarvelCharacter =
@@ -18,8 +17,9 @@ fun MarvelCharacterEntity.toUI(): MarvelCharacter =
         id = this.id,
         name = this.name,
         description = this.description,
-        thumbnail = MarvelImage(
+        thumbnail =
+        MarvelImage(
             path = this.imageUrl.substringBeforeLast('.'),
-            extension = this.imageUrl.substringAfterLast('.')
-        )
+            extension = this.imageUrl.substringAfterLast('.'),
+        ),
     )

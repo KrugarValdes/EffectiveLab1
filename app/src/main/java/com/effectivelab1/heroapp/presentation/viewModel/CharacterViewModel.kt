@@ -11,12 +11,13 @@ import com.effectivelab1.heroapp.network.ApiRepository
 import com.effectivelab1.heroapp.presentation.models.MarvelCharacter
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlin.random.Random
-class CharacterViewModel(
-    private val repository: MarvelRepository
-) : ViewModel() {
 
+class CharacterViewModel(
+    private val repository: MarvelRepository,
+) : ViewModel() {
     private val apiRepository = ApiRepository()
 
     private val _selectedHeroIndex = mutableStateOf(0)
@@ -66,9 +67,9 @@ class CharacterViewModel(
 
         viewModelScope.launch {
             try {
-                val characters = apiRepository.getCharacters(currentOffset)
+                val newCharacters = apiRepository.getCharacters(currentOffset)
                 repository.refreshCharacters(currentOffset, apiRepository)
-                _heroes.value = characters
+                _heroes.update { currentList -> currentList + newCharacters }
                 currentOffset += LIMIT
             } catch (e: Exception) {
                 _errorMessage.value = "Failed to load heroes: ${e.message}"

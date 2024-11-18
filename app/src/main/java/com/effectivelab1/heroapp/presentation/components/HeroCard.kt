@@ -5,7 +5,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
@@ -38,13 +37,13 @@ fun HeroCard(
     val backgroundColor = colorResource(id = R.color.card_background)
 
     Card(
-        modifier = modifier
+        modifier =
+        modifier
             .shadow(
                 elevation = Constants.heroCardShadowElevation,
                 shape = cardShape,
                 clip = true,
-            )
-            .clip(cardShape)
+            ).clip(cardShape)
             .clickable { onClick() },
     ) {
         Box(
@@ -73,7 +72,7 @@ fun HeroCard(
                         color = Color.Black,
                         offset = Offset(2f, 2f),
                         blurRadius = 4f,
-                    )
+                    ),
                 ),
                 modifier =
                 Modifier

@@ -3,11 +3,9 @@ package com.effectivelab1.heroapp.presentation.screens.mainScreen
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -17,30 +15,20 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.effectivelab1.heroapp.R
 import com.effectivelab1.heroapp.constants.Constants
@@ -74,19 +62,20 @@ fun HeroListScreen(
                 .padding(bottom = Constants.screenTitleBottomPadding),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-
             Box(
-                modifier = Modifier
+                modifier =
+                Modifier
                     .fillMaxWidth()
                     .padding(horizontal = Constants.reloadButtonPaddingHorisontal),
-                contentAlignment = Alignment.Center
+                contentAlignment = Alignment.Center,
             ) {
                 MarvelLogo()
                 ReloadButton(
                     viewModel = viewModel,
-                    modifier = Modifier
+                    modifier =
+                    Modifier
                         .align(Alignment.CenterEnd)
-                        .padding(top = Constants.reloadButtonPaddingTop)
+                        .padding(top = Constants.reloadButtonPaddingTop),
                 )
             }
 
@@ -99,7 +88,7 @@ fun HeroListScreen(
                     fontSize = Constants.heroNameFontSize,
                     fontFamily = Constants.interFontFamily,
                     fontWeight = FontWeight.ExtraBold,
-                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                    modifier = Modifier.align(Alignment.CenterHorizontally),
                 )
             } else {
                 HeroListContent(
@@ -127,24 +116,29 @@ fun MarvelLogo() {
 }
 
 @Composable
-fun ReloadButton(viewModel: CharacterViewModel, modifier: Modifier = Modifier) {
+fun ReloadButton(
+    viewModel: CharacterViewModel,
+    modifier: Modifier = Modifier,
+) {
     val context = LocalContext.current
     Box(
-        modifier = modifier
+        modifier =
+        modifier
             .size(Constants.reloadButtonSize)
             .background(Color.Gray, shape = CircleShape)
             .pointerInput(Unit) {
                 detectTapGestures(
                     onLongPress = {
-                        Toast.makeText(
-                            context,
-                            context.getString(R.string.reload_toast_message),
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast
+                            .makeText(
+                                context,
+                                context.getString(R.string.reload_toast_message),
+                                Toast.LENGTH_SHORT,
+                            ).show()
                     },
                     onTap = {
                         viewModel.clearDatabaseAndReload()
-                    }
+                    },
                 )
             },
         contentAlignment = Alignment.Center,
@@ -153,7 +147,7 @@ fun ReloadButton(viewModel: CharacterViewModel, modifier: Modifier = Modifier) {
             imageVector = Icons.Default.Refresh,
             contentDescription = stringResource(R.string.reload_button_description),
             modifier = Modifier.size(Constants.reloadIconSize),
-            tint = Color.White
+            tint = Color.White,
         )
     }
 }

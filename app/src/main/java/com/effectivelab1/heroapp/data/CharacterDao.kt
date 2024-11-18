@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface MarvelCharacterDao {
-
     @Query("SELECT * FROM marvel_characters ORDER BY name ASC")
     fun getAllCharacters(): Flow<List<MarvelCharacterEntity>>
 
