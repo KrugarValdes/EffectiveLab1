@@ -98,6 +98,16 @@ class CharacterViewModel(
         }
     }
 
+    fun clearDatabaseAndReload() {
+        viewModelScope.launch {
+            repository.clearDatabase()
+            currentOffset = 0
+            _selectedHeroIndex.value = 0
+            _errorMessage.value = null
+            _heroes.value = emptyList()
+            loadHeroes()
+        }
+    }
 
     fun selectHero(index: Int) {
         _selectedHeroIndex.value = index
