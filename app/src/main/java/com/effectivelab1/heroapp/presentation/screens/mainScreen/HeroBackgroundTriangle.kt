@@ -1,4 +1,4 @@
-package com.effectivelab1.heroapp.ui.screens.mainScreen
+package com.effectivelab1.heroapp.presentation.screens.mainScreen
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
@@ -14,9 +14,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import com.effectivelab1.heroapp.constants.Constants
 
-@Suppress("ktlint:standard:function-naming")
 @Composable
-fun HeroBackgroundTriangle(selectedColor: Color) {
+fun BackgroundTriangle(selectedColor: Color) {
     val animatedColor =
         animateColorAsState(
             targetValue = selectedColor,
@@ -30,18 +29,18 @@ fun HeroBackgroundTriangle(selectedColor: Color) {
     ) {
         Canvas(
             modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight(Constants.screenTriangleSize),
+            Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(Constants.screenTriangleSize),
         ) {
             drawPath(
                 path =
-                    Path().apply {
-                        moveTo(size.width, size.height)
-                        lineTo(0f, size.height)
-                        lineTo(size.width, 0f)
-                        close()
-                    },
+                Path().apply {
+                    moveTo(size.width, size.height)
+                    lineTo(0f, size.height)
+                    lineTo(size.width, 0f)
+                    close()
+                },
                 color = animatedColor.value,
             )
         }

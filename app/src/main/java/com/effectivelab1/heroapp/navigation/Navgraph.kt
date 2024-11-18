@@ -1,27 +1,35 @@
 package com.effectivelab1.heroapp.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.effectivelab1.heroapp.model.Hero
-import com.effectivelab1.heroapp.ui.screens.heroInfoScreen.HeroDetailScreen
-import com.effectivelab1.heroapp.ui.screens.mainScreen.HeroListScreen
-import com.google.gson.Gson
+import com.effectivelab1.heroapp.presentation.screens.heroInfoScreen.HeroDetailScreen
+import com.effectivelab1.heroapp.presentation.screens.mainScreen.HeroListScreen
+import com.effectivelab1.heroapp.presentation.viewModel.CharacterViewModel
 
 @Composable
 fun NavGraph(
     navController: NavHostController,
     onItemChanged: (Int) -> Unit,
 ) {
-    val gson = Gson()
+    val viewModel: CharacterViewModel = remember { CharacterViewModel() }
+
     NavHost(navController = navController, startDestination = "heroList") {
         composable("heroList") {
-            HeroListScreen(navController = navController, onItemChanged = onItemChanged)
+            HeroListScreen(navController = navController, viewModel = viewModel, onItemChanged = onItemChanged)
         }
-        composable("hero_details?heroJson={heroJson}") { backStackEntry ->
-            val heroJson = backStackEntry.arguments?.getString("heroJson")
-            val hero = heroJson?.let { gson.fromJson(it, Hero::class.java) }
+        composable("hero_details/{heroId}") { backStackEntry ->
+            val heroId = backStackEntry.arguments?.getString("heroId")?.toIntOrNull()
+
+            if (heroId != null) {
+                viewModel.loadHeroById(heroId)
+            }
+
+            val hero by viewModel.selectedHero.collectAsState(initial = null)
 
             HeroDetailScreen(currentHero = hero, navigator = navController)
         }
