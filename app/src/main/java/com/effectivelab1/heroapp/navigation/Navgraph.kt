@@ -1,12 +1,11 @@
 package com.effectivelab1.heroapp.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.effectivelab1.heroapp.presentation.screens.heroInfoScreen.HeroDetailScreen
-import com.effectivelab1.heroapp.presentation.screens.mainScreen.HeroListScreen
+import com.effectivelab1.heroapp.presentation.screens.HeroDetailScreen
+import com.effectivelab1.heroapp.presentation.screens.HeroListScreen
 import com.effectivelab1.heroapp.presentation.viewModel.CharacterViewModel
 
 @Composable

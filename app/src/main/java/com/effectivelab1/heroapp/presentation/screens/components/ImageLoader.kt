@@ -1,4 +1,4 @@
-package com.effectivelab1.heroapp.presentation.components
+package com.effectivelab1.heroapp.presentation.screens.components
 import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

@@ -1,8 +1,8 @@
 package com.effectivelab1.heroapp.network
 
-import com.effectivelab1.heroapp.constants.ApiKeys
-import com.effectivelab1.heroapp.presentation.models.MarvelCharacter
-import com.effectivelab1.heroapp.presentation.models.MarvelResponse
+import com.effectivelab1.heroapp.data.api.ApiKeys
+import com.effectivelab1.heroapp.data.model.MarvelCharacter
+import com.effectivelab1.heroapp.data.model.MarvelResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

@@ -1,4 +1,4 @@
-package com.effectivelab1.heroapp.presentation.screens.mainScreen
+package com.effectivelab1.heroapp.presentation.screens.components
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
-import com.effectivelab1.heroapp.constants.Constants
+import com.effectivelab1.heroapp.util.Constants
 
 @Composable
 fun BackgroundTriangle(selectedColor: Color) {

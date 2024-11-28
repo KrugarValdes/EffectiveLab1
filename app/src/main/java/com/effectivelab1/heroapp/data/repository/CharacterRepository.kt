@@ -1,9 +1,9 @@
-package com.effectivelab1.heroapp.data
+package com.effectivelab1.heroapp.data.repository
 
-import com.effectivelab1.heroapp.constants.ApiKeys
-import com.effectivelab1.heroapp.data.MarvelCharacterDao
+import com.effectivelab1.heroapp.data.database.MarvelCharacterDao
 import com.effectivelab1.heroapp.network.ApiRepository
-import com.effectivelab1.heroapp.presentation.models.MarvelCharacter
+import com.effectivelab1.heroapp.data.model.MarvelCharacter
+import com.effectivelab1.heroapp.data.model.MarvelCharacterUI
 import com.effectivelab1.heroapp.util.toEntity
 import com.effectivelab1.heroapp.util.toUI
 import kotlinx.coroutines.flow.Flow
@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.map
 class MarvelRepository(
     private val dao: MarvelCharacterDao
 ) {
-    fun getCharacters(): Flow<List<MarvelCharacter>> =
+    fun getCharacters(): Flow<List<MarvelCharacterUI>> =
         dao.getAllCharacters().map { entities ->
             entities.map { it.toUI() }
         }
@@ -30,14 +30,14 @@ class MarvelRepository(
         dao.insertCharacters(characters.map { it.toEntity() })
     }
 
-    suspend fun getCharacterById(id: Int, apiRepository: ApiRepository): MarvelCharacter? {
+    suspend fun getCharacterById(id: Int, apiRepository: ApiRepository): MarvelCharacterUI? {
         val localCharacter = dao.getCharacterById(id)?.toUI()
         if (localCharacter != null) return localCharacter
 
         val remoteCharacter = apiRepository.getCharacter(id)
         remoteCharacter?.let {
             dao.insertCharacter(it.toEntity())
-            return it
+            return it.toUI()
         }
         return null
     }

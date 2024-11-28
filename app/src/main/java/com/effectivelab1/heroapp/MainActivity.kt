@@ -7,8 +7,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.remember
 import androidx.navigation.compose.rememberNavController
-import com.effectivelab1.heroapp.data.AppDatabase
-import com.effectivelab1.heroapp.data.MarvelRepository
+import com.effectivelab1.heroapp.data.database.AppDatabase
+import com.effectivelab1.heroapp.data.repository.MarvelRepository
 import com.effectivelab1.heroapp.navigation.NavGraph
 import com.effectivelab1.heroapp.presentation.theme.HeroAppTheme
 import com.effectivelab1.heroapp.presentation.viewModel.CharacterViewModel

@@ -1,4 +1,4 @@
-package com.effectivelab1.heroapp.presentation.components
+package com.effectivelab1.heroapp.presentation.screens.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -22,12 +22,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.effectivelab1.heroapp.R
-import com.effectivelab1.heroapp.constants.Constants
-import com.effectivelab1.heroapp.presentation.models.MarvelCharacter
+import com.effectivelab1.heroapp.util.Constants
+import com.effectivelab1.heroapp.data.model.MarvelCharacter
+import com.effectivelab1.heroapp.data.model.MarvelCharacterUI
 
 @Composable
 fun HeroCard(
-    hero: MarvelCharacter,
+    hero: MarvelCharacterUI,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     fontSize: Float,

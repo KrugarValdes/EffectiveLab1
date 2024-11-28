@@ -1,4 +1,4 @@
-package com.effectivelab1.heroapp.presentation.screens.mainScreen
+package com.effectivelab1.heroapp.presentation.screens
 
 import android.widget.Toast
 import androidx.compose.foundation.Image
@@ -31,8 +31,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
 import com.effectivelab1.heroapp.R
-import com.effectivelab1.heroapp.constants.Constants
-import com.effectivelab1.heroapp.presentation.models.MarvelCharacter
+import com.effectivelab1.heroapp.util.Constants
+import com.effectivelab1.heroapp.data.model.MarvelCharacter
+import com.effectivelab1.heroapp.data.model.MarvelCharacterUI
+import com.effectivelab1.heroapp.presentation.screens.components.BackgroundTriangle
+import com.effectivelab1.heroapp.presentation.screens.components.ErrorMessage
+import com.effectivelab1.heroapp.presentation.screens.components.LoadingText
+import com.effectivelab1.heroapp.presentation.screens.components.ReloadButton
 import com.effectivelab1.heroapp.presentation.viewModel.CharacterViewModel
 import com.effectivelab1.heroapp.ui.screens.mainScreen.HeroListCard
 
@@ -82,14 +87,7 @@ fun HeroListScreen(
             ScreenTitle()
             ErrorMessage(errorMessage)
             if (isLoading and heroesList.isEmpty() and (errorMessage == null)) {
-                Text(
-                    text = stringResource(R.string.loading_string),
-                    color = Color.White,
-                    fontSize = Constants.heroNameFontSize,
-                    fontFamily = Constants.interFontFamily,
-                    fontWeight = FontWeight.ExtraBold,
-                    modifier = Modifier.align(Alignment.CenterHorizontally),
-                )
+                LoadingText()
             } else {
                 HeroListContent(
                     heroesList = heroesList,
@@ -116,43 +114,6 @@ fun MarvelLogo() {
 }
 
 @Composable
-fun ReloadButton(
-    viewModel: CharacterViewModel,
-    modifier: Modifier = Modifier,
-) {
-    val context = LocalContext.current
-    Box(
-        modifier =
-        modifier
-            .size(Constants.reloadButtonSize)
-            .background(Color.Gray, shape = CircleShape)
-            .pointerInput(Unit) {
-                detectTapGestures(
-                    onLongPress = {
-                        Toast
-                            .makeText(
-                                context,
-                                context.getString(R.string.reload_toast_message),
-                                Toast.LENGTH_SHORT,
-                            ).show()
-                    },
-                    onTap = {
-                        viewModel.clearDatabaseAndReload()
-                    },
-                )
-            },
-        contentAlignment = Alignment.Center,
-    ) {
-        Icon(
-            imageVector = Icons.Default.Refresh,
-            contentDescription = stringResource(R.string.reload_button_description),
-            modifier = Modifier.size(Constants.reloadIconSize),
-            tint = Color.White,
-        )
-    }
-}
-
-@Composable
 fun ScreenTitle() {
     Text(
         text = stringResource(R.string.choose_your_hero),
@@ -168,22 +129,8 @@ fun ScreenTitle() {
 }
 
 @Composable
-fun ErrorMessage(errorMessage: String?) {
-    if (errorMessage != null) {
-        Text(
-            text = errorMessage,
-            color = Color.White,
-            fontSize = Constants.errorMessageFontSize,
-            fontFamily = Constants.interFontFamily,
-            fontWeight = FontWeight.ExtraBold,
-            modifier = Modifier.padding(Constants.errorMessagePadding),
-        )
-    }
-}
-
-@Composable
 fun HeroListContent(
-    heroesList: List<MarvelCharacter>,
+    heroesList: List<MarvelCharacterUI>,
     navController: NavController,
     viewModel: CharacterViewModel,
     onItemChanged: (Int) -> Unit,

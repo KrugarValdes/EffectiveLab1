@@ -25,15 +25,16 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.effectivelab1.heroapp.constants.Constants
-import com.effectivelab1.heroapp.presentation.components.HeroCard
-import com.effectivelab1.heroapp.presentation.models.MarvelCharacter
+import com.effectivelab1.heroapp.util.Constants
+import com.effectivelab1.heroapp.presentation.screens.components.HeroCard
+import com.effectivelab1.heroapp.data.model.MarvelCharacter
+import com.effectivelab1.heroapp.data.model.MarvelCharacterUI
 import kotlin.math.abs
 
 @Composable
 fun HeroListCard(
-    heroesList: List<MarvelCharacter>,
-    onHeroClick: (MarvelCharacter) -> Unit,
+    heroesList: List<MarvelCharacterUI>,
+    onHeroClick: (MarvelCharacterUI) -> Unit,
     onItemChanged: (Int) -> Unit,
     onScrolledToEnd: () -> Unit,
 ) {
@@ -87,7 +88,7 @@ fun HeroListCard(
 
 @Composable
 fun HeroItem(
-    hero: MarvelCharacter,
+    hero: MarvelCharacterUI,
     isSelected: Boolean,
     onHeroClick: () -> Unit,
 ) {

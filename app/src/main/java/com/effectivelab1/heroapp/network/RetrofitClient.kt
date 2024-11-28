@@ -1,8 +1,8 @@
 package com.effectivelab1.heroapp.network
 
-import com.effectivelab1.heroapp.constants.ApiKeys.BASE_URL
-import com.effectivelab1.heroapp.constants.ApiKeys.PRIVATE_KEY
-import com.effectivelab1.heroapp.constants.ApiKeys.PUBLIC_KEY
+import com.effectivelab1.heroapp.data.api.ApiKeys.BASE_URL
+import com.effectivelab1.heroapp.data.api.ApiKeys.PRIVATE_KEY
+import com.effectivelab1.heroapp.data.api.ApiKeys.PUBLIC_KEY
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient

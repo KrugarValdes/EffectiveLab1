@@ -5,10 +5,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.effectivelab1.heroapp.constants.ApiKeys.LIMIT
-import com.effectivelab1.heroapp.data.MarvelRepository
+import com.effectivelab1.heroapp.data.api.ApiKeys.LIMIT
+import com.effectivelab1.heroapp.data.repository.MarvelRepository
 import com.effectivelab1.heroapp.network.ApiRepository
-import com.effectivelab1.heroapp.presentation.models.MarvelCharacter
+import com.effectivelab1.heroapp.data.model.MarvelCharacter
+import com.effectivelab1.heroapp.data.model.MarvelCharacterUI
+import com.effectivelab1.heroapp.util.toEntity
+import com.effectivelab1.heroapp.util.toUI
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -23,11 +26,11 @@ class CharacterViewModel(
     private val _selectedHeroIndex = mutableStateOf(0)
     val selectedHeroIndex: State<Int> get() = _selectedHeroIndex
 
-    private val _heroes = MutableStateFlow<List<MarvelCharacter>>(emptyList())
-    val heroes: StateFlow<List<MarvelCharacter>> get() = _heroes
+    private val _heroes = MutableStateFlow<List<MarvelCharacterUI>>(emptyList())
+    val heroes: StateFlow<List<MarvelCharacterUI>> get() = _heroes
 
-    private val _selectedHero = MutableStateFlow<MarvelCharacter?>(null)
-    val selectedHero: StateFlow<MarvelCharacter?> get() = _selectedHero
+    private val _selectedHero = MutableStateFlow<MarvelCharacterUI?>(null)
+    val selectedHero: StateFlow<MarvelCharacterUI?> get() = _selectedHero
 
     private val _triangleColor = mutableStateOf(getRandomColor())
     val triangleColor: Color get() = _triangleColor.value
@@ -67,7 +70,7 @@ class CharacterViewModel(
 
         viewModelScope.launch {
             try {
-                val newCharacters = apiRepository.getCharacters(currentOffset)
+                val newCharacters = apiRepository.getCharacters(currentOffset).map { it.toUI() }
                 repository.refreshCharacters(currentOffset, apiRepository)
                 _heroes.update { currentList -> currentList + newCharacters }
                 currentOffset += LIMIT

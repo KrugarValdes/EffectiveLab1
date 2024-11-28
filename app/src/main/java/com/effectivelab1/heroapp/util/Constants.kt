@@ -1,4 +1,4 @@
-package com.effectivelab1.heroapp.constants
+package com.effectivelab1.heroapp.util
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.ui.text.font.Font

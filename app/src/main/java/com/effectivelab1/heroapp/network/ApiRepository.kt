@@ -1,7 +1,7 @@
 package com.effectivelab1.heroapp.network
 
-import com.effectivelab1.heroapp.constants.ApiKeys
-import com.effectivelab1.heroapp.presentation.models.MarvelCharacter
+import com.effectivelab1.heroapp.data.api.ApiKeys
+import com.effectivelab1.heroapp.data.model.MarvelCharacter
 
 class ApiRepository {
     private val apiService = RetrofitClient.apiService
