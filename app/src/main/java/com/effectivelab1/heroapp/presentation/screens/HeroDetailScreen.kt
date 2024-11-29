@@ -18,7 +18,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
 import com.effectivelab1.heroapp.util.Constants
 import com.effectivelab1.heroapp.presentation.screens.components.ImageLoader
-import com.effectivelab1.heroapp.data.model.MarvelCharacter
 import com.effectivelab1.heroapp.data.model.MarvelCharacterUI
 import com.effectivelab1.heroapp.presentation.screens.components.LoadingText
 import com.effectivelab1.heroapp.presentation.viewModel.CharacterViewModel
@@ -33,9 +32,9 @@ fun HeroDetailScreen(
     if (heroId != null) {
         viewModel.loadHeroById(heroId)
     }
-    val currentHero = viewModel.selectedHero.collectAsState(initial = null).value
+    val state = viewModel.state.collectAsState().value
 
-    if (currentHero == null) {
+    if (state.selectedHero == null) {
         Box(modifier = Modifier.fillMaxSize()) {
             NavigationBackButton(navigator = navigator)
             LoadingText()
@@ -43,11 +42,11 @@ fun HeroDetailScreen(
     } else {
         Box(modifier = Modifier.fillMaxSize()) {
             ImageLoader(
-                imageUrl = currentHero.imageUrl,
-                contentDescription = currentHero.name,
+                imageUrl = state.selectedHero.imageUrl,
+                contentDescription = state.selectedHero.name,
                 modifier = Modifier.fillMaxSize(),
             )
-            HeroInformation(currentHero)
+            HeroInformation(state.selectedHero)
             NavigationBackButton(navigator = navigator)
         }
     }

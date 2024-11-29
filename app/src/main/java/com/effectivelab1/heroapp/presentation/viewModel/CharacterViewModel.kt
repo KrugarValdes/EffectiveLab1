@@ -1,44 +1,29 @@
 package com.effectivelab1.heroapp.presentation.viewModel
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.effectivelab1.heroapp.data.api.ApiKeys.LIMIT
 import com.effectivelab1.heroapp.data.repository.MarvelRepository
 import com.effectivelab1.heroapp.network.ApiRepository
-import com.effectivelab1.heroapp.data.model.MarvelCharacter
-import com.effectivelab1.heroapp.data.model.MarvelCharacterUI
-import com.effectivelab1.heroapp.util.toEntity
 import com.effectivelab1.heroapp.util.toUI
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 import kotlin.random.Random
 
-class CharacterViewModel(
+@HiltViewModel
+class CharacterViewModel @Inject constructor(
     private val repository: MarvelRepository,
+    private val apiRepository: ApiRepository
 ) : ViewModel() {
-    private val apiRepository = ApiRepository()
 
-    private val _selectedHeroIndex = mutableStateOf(0)
-    val selectedHeroIndex: State<Int> get() = _selectedHeroIndex
+    private val _state = MutableStateFlow(UIState())
+    val state: StateFlow<UIState> get() = _state
 
-    private val _heroes = MutableStateFlow<List<MarvelCharacterUI>>(emptyList())
-    val heroes: StateFlow<List<MarvelCharacterUI>> get() = _heroes
-
-    private val _selectedHero = MutableStateFlow<MarvelCharacterUI?>(null)
-    val selectedHero: StateFlow<MarvelCharacterUI?> get() = _selectedHero
-
-    private val _triangleColor = mutableStateOf(getRandomColor())
-    val triangleColor: Color get() = _triangleColor.value
-
-    private val _errorMessage = MutableStateFlow<String?>(null)
-    val errorMessage: StateFlow<String?> get() = _errorMessage
-
-    var isLoading = MutableStateFlow(false)
     private var currentOffset = 0
 
     init {
@@ -49,10 +34,10 @@ class CharacterViewModel(
     private fun loadHeroesFromDatabase() {
         viewModelScope.launch {
             repository.getCharacters().collect { localHeroes ->
-                _heroes.value = localHeroes
                 if (localHeroes.isEmpty()) {
                     loadHeroes()
                 }
+                _state.update { it.copy(heroes = localHeroes) }
             }
         }
     }
@@ -65,25 +50,25 @@ class CharacterViewModel(
     }
 
     private fun loadHeroes() {
-        if (isLoading.value) return
-        isLoading.value = true
+        if (_state.value.isLoading) return
+        _state.update { it.copy(isLoading = true) }
 
         viewModelScope.launch {
             try {
                 val newCharacters = apiRepository.getCharacters(currentOffset).map { it.toUI() }
                 repository.refreshCharacters(currentOffset, apiRepository)
-                _heroes.update { currentList -> currentList + newCharacters }
+                _state.update { it.copy(heroes = it.heroes + newCharacters) }
                 currentOffset += LIMIT
             } catch (e: Exception) {
-                _errorMessage.value = "Failed to load heroes: ${e.message}"
+                _state.update { it.copy(errorMessage = "Failed to load heroes: ${e.message}") }
             } finally {
-                isLoading.value = false
+                _state.update { it.copy(isLoading = false) }
             }
         }
     }
 
     fun onListScrolledToEnd() {
-        if (!isLoading.value) {
+        if (!_state.value.isLoading) {
             loadHeroes()
         }
     }
@@ -92,12 +77,14 @@ class CharacterViewModel(
         viewModelScope.launch {
             try {
                 val hero = repository.getCharacterById(heroId, apiRepository)
-                _selectedHero.value = hero
+                _state.update { it.copy(selectedHero = hero) }
                 if (hero == null) {
-                    _errorMessage.value = "Hero not found"
+                    _state.update { it.copy(errorMessage = "Hero not found") }
                 }
             } catch (e: Exception) {
-                _errorMessage.value = "Failed to load hero: ${e.message}"
+                _state.update { it.copy(errorMessage = "Failed to load hero: ${e.message}") }
+            } finally {
+                _state.update { it.copy(isLoading = false) }
             }
         }
     }
@@ -106,23 +93,24 @@ class CharacterViewModel(
         viewModelScope.launch {
             repository.clearDatabase()
             currentOffset = 0
-            _selectedHeroIndex.value = 0
-            _errorMessage.value = null
-            _heroes.value = emptyList()
+            _state.update { it.copy(
+                heroes = emptyList(),
+                selectedHero = null,
+                errorMessage = null
+            ) }
             loadHeroes()
         }
     }
 
     fun selectHero(index: Int) {
-        _selectedHeroIndex.value = index
-        _triangleColor.value = getRandomColor()
+        val selectedHero = _state.value.heroes.getOrNull(index)
+        _state.update { it.copy(selectedHero = selectedHero, triangleColor = getRandomColor()) }
     }
 
     fun resetSelectedHero() {
-        _selectedHero.value = null
-    }
+        _state.update { it.copy(selectedHero = null) }    }
 
-    private fun getRandomColor(): Color {
+    fun getRandomColor(): Color {
         val random = Random
         return Color(
             red = random.nextFloat(),

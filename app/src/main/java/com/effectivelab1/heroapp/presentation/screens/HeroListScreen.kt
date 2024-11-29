@@ -47,10 +47,12 @@ fun HeroListScreen(
     viewModel: CharacterViewModel,
     onItemChanged: (Int) -> Unit,
 ) {
-    val heroesList by viewModel.heroes.collectAsState()
-    val selectedColor = viewModel.triangleColor
-    val errorMessage by viewModel.errorMessage.collectAsState()
-    val isLoading by viewModel.isLoading.collectAsState()
+
+    val state = viewModel.state.collectAsState().value
+    val heroesList = state.heroes
+    val selectedColor = state.triangleColor
+    val errorMessage = state.errorMessage
+    val isLoading = state.isLoading
 
     Box(
         modifier =

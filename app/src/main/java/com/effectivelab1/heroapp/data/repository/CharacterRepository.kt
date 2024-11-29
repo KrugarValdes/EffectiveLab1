@@ -2,14 +2,14 @@ package com.effectivelab1.heroapp.data.repository
 
 import com.effectivelab1.heroapp.data.database.MarvelCharacterDao
 import com.effectivelab1.heroapp.network.ApiRepository
-import com.effectivelab1.heroapp.data.model.MarvelCharacter
 import com.effectivelab1.heroapp.data.model.MarvelCharacterUI
 import com.effectivelab1.heroapp.util.toEntity
 import com.effectivelab1.heroapp.util.toUI
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class MarvelRepository(
+class MarvelRepository @Inject constructor(
     private val dao: MarvelCharacterDao
 ) {
     fun getCharacters(): Flow<List<MarvelCharacterUI>> =
