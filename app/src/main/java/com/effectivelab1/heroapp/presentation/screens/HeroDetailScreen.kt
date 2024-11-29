@@ -1,35 +1,27 @@
-package com.effectivelab1.heroapp.presentation.screens.heroInfoScreen
+package com.effectivelab1.heroapp.presentation.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
-import com.effectivelab1.heroapp.R
-import com.effectivelab1.heroapp.constants.Constants
-import com.effectivelab1.heroapp.constants.Constants.iconButtonPaddingStart
-import com.effectivelab1.heroapp.constants.Constants.sizeIconArrowBack
-import com.effectivelab1.heroapp.presentation.components.ImageLoader
-import com.effectivelab1.heroapp.presentation.models.MarvelCharacter
+import com.effectivelab1.heroapp.data.model.MarvelCharacterUI
+import com.effectivelab1.heroapp.presentation.screens.components.ImageLoader
+import com.effectivelab1.heroapp.presentation.screens.components.LoadingText
+import com.effectivelab1.heroapp.presentation.screens.components.NavigationBackButton
 import com.effectivelab1.heroapp.presentation.viewModel.CharacterViewModel
+import com.effectivelab1.heroapp.util.Constants
 
 @Composable
 fun HeroDetailScreen(
@@ -40,37 +32,33 @@ fun HeroDetailScreen(
     if (heroId != null) {
         viewModel.loadHeroById(heroId)
     }
-    val currentHero = viewModel.selectedHero.collectAsState(initial = null).value
+    val state = viewModel.state.collectAsState().value
 
-    if (currentHero == null) {
+    if (state.selectedHero == null) {
         Box(modifier = Modifier.fillMaxSize()) {
             NavigationBackButton(navigator = navigator)
-            Text(
-                text = stringResource(R.string.loading_string),
-                color = Color.Black,
-                modifier = Modifier.align(Alignment.Center),
-            )
+            LoadingText()
         }
     } else {
         Box(modifier = Modifier.fillMaxSize()) {
             ImageLoader(
-                imageUrl = currentHero.imageUrl,
-                contentDescription = currentHero.name,
+                imageUrl = state.selectedHero.imageUrl,
+                contentDescription = state.selectedHero.name,
                 modifier = Modifier.fillMaxSize(),
             )
-            HeroInformation(currentHero)
+            HeroInformation(state.selectedHero)
             NavigationBackButton(navigator = navigator)
         }
     }
 }
 
 @Composable
-private fun HeroInformation(currentHero: MarvelCharacter) {
+private fun HeroInformation(currentHero: MarvelCharacterUI) {
     Column(
         modifier =
-        Modifier
-            .fillMaxSize()
-            .padding(bottom = Constants.heroInfoBottomPadding, start = Constants.heroInfoStartPadding),
+            Modifier
+                .fillMaxSize()
+                .padding(bottom = Constants.heroInfoBottomPadding, start = Constants.heroInfoStartPadding),
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.Start,
     ) {
@@ -88,14 +76,14 @@ private fun HeroName(name: String) {
         fontWeight = FontWeight.ExtraBold,
         color = Color.White,
         style =
-        TextStyle(
-            shadow =
-            Shadow(
-                color = Color.Black,
-                offset = Offset(2f, 2f),
-                blurRadius = 4f,
+            TextStyle(
+                shadow =
+                    Shadow(
+                        color = Color.Black,
+                        offset = Offset(2f, 2f),
+                        blurRadius = 4f,
+                    ),
             ),
-        ),
         modifier = Modifier.padding(bottom = Constants.heroNameBottomPadding),
     )
 }
@@ -110,33 +98,13 @@ private fun HeroDescription(description: String) {
         fontWeight = FontWeight.ExtraBold,
         color = Color.White,
         style =
-        TextStyle(
-            shadow =
-            Shadow(
-                color = Color.Black,
-                offset = Offset(2f, 2f),
-                blurRadius = 4f,
+            TextStyle(
+                shadow =
+                    Shadow(
+                        color = Color.Black,
+                        offset = Offset(2f, 2f),
+                        blurRadius = 4f,
+                    ),
             ),
-        ),
     )
-}
-
-@Composable
-private fun NavigationBackButton(
-    navigator: NavController,
-    modifier: Modifier = Modifier,
-) {
-    IconButton(
-        onClick = { navigator.popBackStack() },
-        modifier =
-        modifier
-            .padding(iconButtonPaddingStart)
-            .size(sizeIconArrowBack),
-    ) {
-        Icon(
-            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-            contentDescription = "Back",
-            tint = Color.LightGray,
-        )
-    }
 }

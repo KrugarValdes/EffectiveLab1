@@ -1,4 +1,4 @@
-package com.effectivelab1.heroapp.presentation.models
+package com.effectivelab1.heroapp.data.model
 
 import com.squareup.moshi.Json
 

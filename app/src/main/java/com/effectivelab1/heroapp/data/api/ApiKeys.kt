@@ -1,4 +1,4 @@
-package com.effectivelab1.heroapp.constants
+package com.effectivelab1.heroapp.data.api
 
 object ApiKeys {
 //    const val PUBLIC_KEY = "64b82f610f63aee1bb764d70fa4921aa"

@@ -5,26 +5,23 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.runtime.remember
+import androidx.activity.viewModels
 import androidx.navigation.compose.rememberNavController
-import com.effectivelab1.heroapp.data.AppDatabase
-import com.effectivelab1.heroapp.data.MarvelRepository
 import com.effectivelab1.heroapp.navigation.NavGraph
 import com.effectivelab1.heroapp.presentation.theme.HeroAppTheme
 import com.effectivelab1.heroapp.presentation.viewModel.CharacterViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    private val viewModel: CharacterViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        val database = AppDatabase.getDatabase(applicationContext)
-        val dao = database.marvelCharacterDao()
-        val repository = MarvelRepository(dao)
-
         setContent {
             HeroAppTheme {
-                val viewModel = remember { CharacterViewModel(repository) }
                 val navController = rememberNavController()
 
                 NavGraph(

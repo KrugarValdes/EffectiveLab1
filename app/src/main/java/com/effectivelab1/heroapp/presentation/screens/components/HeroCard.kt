@@ -1,4 +1,4 @@
-package com.effectivelab1.heroapp.presentation.components
+package com.effectivelab1.heroapp.presentation.screens.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -22,12 +22,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.effectivelab1.heroapp.R
-import com.effectivelab1.heroapp.constants.Constants
-import com.effectivelab1.heroapp.presentation.models.MarvelCharacter
+import com.effectivelab1.heroapp.data.model.MarvelCharacterUI
+import com.effectivelab1.heroapp.util.Constants
 
 @Composable
 fun HeroCard(
-    hero: MarvelCharacter,
+    hero: MarvelCharacterUI,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     fontSize: Float,
@@ -38,19 +38,19 @@ fun HeroCard(
 
     Card(
         modifier =
-        modifier
-            .shadow(
-                elevation = Constants.heroCardShadowElevation,
-                shape = cardShape,
-                clip = true,
-            ).clip(cardShape)
-            .clickable { onClick() },
+            modifier
+                .shadow(
+                    elevation = Constants.heroCardShadowElevation,
+                    shape = cardShape,
+                    clip = true,
+                ).clip(cardShape)
+                .clickable { onClick() },
     ) {
         Box(
             modifier =
-            Modifier
-                .fillMaxSize()
-                .background(backgroundColor),
+                Modifier
+                    .fillMaxSize()
+                    .background(backgroundColor),
             contentAlignment = Alignment.BottomStart,
         ) {
             ImageLoader(
@@ -66,20 +66,20 @@ fun HeroCard(
                 fontWeight = FontWeight.ExtraBold,
                 color = Color.White,
                 style =
-                TextStyle(
-                    shadow =
-                    Shadow(
-                        color = Color.Black,
-                        offset = Offset(2f, 2f),
-                        blurRadius = 4f,
+                    TextStyle(
+                        shadow =
+                            Shadow(
+                                color = Color.Black,
+                                offset = Offset(2f, 2f),
+                                blurRadius = 4f,
+                            ),
                     ),
-                ),
                 modifier =
-                Modifier
-                    .padding(
-                        start = textPadding.dp,
-                        bottom = textPadding.dp,
-                    ),
+                    Modifier
+                        .padding(
+                            start = textPadding.dp,
+                            bottom = textPadding.dp,
+                        ),
             )
         }
     }
