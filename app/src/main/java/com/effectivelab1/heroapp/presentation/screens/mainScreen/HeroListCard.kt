@@ -1,5 +1,6 @@
 package com.effectivelab1.heroapp.ui.screens.mainScreen
 
+import android.util.Log
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -17,12 +19,13 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.effectivelab1.heroapp.constants.Constants
-import com.effectivelab1.heroapp.constants.Constants.cardAnimationDuration
 import com.effectivelab1.heroapp.presentation.components.HeroCard
 import com.effectivelab1.heroapp.presentation.models.MarvelCharacter
 import kotlin.math.abs
@@ -37,25 +40,38 @@ fun HeroListCard(
     val lazyListState = rememberLazyListState()
     val snapFlingBehavior = rememberSnapFlingBehavior(lazyListState)
 
-    val currentItem by rememberUpdatedState(
-        newValue = getCurrentVisibleItem(lazyListState),
-    )
+    val currentItem by rememberUpdatedState(newValue = getCurrentVisibleItem(lazyListState))
 
     LaunchedEffect(currentItem) {
         onItemChanged(currentItem)
     }
+    val lastVisibleItemIndex = remember { mutableStateOf(-1) }
 
-    LaunchedEffect(lazyListState) {
-        onListScrolledToEnd(lazyListState, heroesList.size, onScrolledToEnd)
+    LaunchedEffect(lazyListState.layoutInfo) {
+        val newLastVisibleItemIndex =
+            lazyListState.layoutInfo.visibleItemsInfo
+                .lastOrNull()
+                ?.index ?: -1
+        val totalItemCount = heroesList.size
+
+        if (newLastVisibleItemIndex != lastVisibleItemIndex.value) {
+            Log.d("HeroList", "Size: $totalItemCount, LastVisibleItemIndex: $newLastVisibleItemIndex")
+
+            if (newLastVisibleItemIndex == totalItemCount - 1) {
+                Log.d("HeroList", "Updating DB")
+                onScrolledToEnd()
+            }
+            lastVisibleItemIndex.value = newLastVisibleItemIndex
+        }
     }
 
     LazyRow(
         state = lazyListState,
         flingBehavior = snapFlingBehavior,
         modifier =
-        Modifier
-            .fillMaxWidth()
-            .height(Constants.heroListCardHeight),
+            Modifier
+                .fillMaxWidth()
+                .height(Constants.heroListCardHeight),
         contentPadding = PaddingValues(horizontal = Constants.horizontalPadding),
         horizontalArrangement = Arrangement.spacedBy(Constants.spacerBetweenItems),
     ) {
@@ -77,8 +93,13 @@ fun HeroItem(
 ) {
     val scale by animateFloatAsState(
         targetValue = if (isSelected) 1f else 0.9f,
-        animationSpec = tween(durationMillis = cardAnimationDuration, easing = LinearOutSlowInEasing),
+        animationSpec = tween(durationMillis = Constants.cardAnimationDuration, easing = LinearOutSlowInEasing),
     )
+
+    val cardWidth = Constants.heroCardWidth.value * scale
+    val cardHeight = Constants.heroCardHeight.value * scale
+    val fontSize = Constants.heroCardNameFontSize.value * scale
+    val textPadding = Constants.heroCardTextPadding.value * scale
 
     Box(
         modifier = Modifier.fillMaxHeight(),
@@ -86,8 +107,10 @@ fun HeroItem(
     ) {
         HeroCard(
             hero = hero,
-            scale = scale,
             onClick = onHeroClick,
+            modifier = Modifier.size(width = cardWidth.dp, height = cardHeight.dp),
+            fontSize = fontSize,
+            textPadding = textPadding,
         )
     }
 }
@@ -96,17 +119,3 @@ fun getCurrentVisibleItem(lazyListState: LazyListState): Int =
     lazyListState.layoutInfo.visibleItemsInfo
         .minByOrNull { abs(it.offset) }
         ?.index ?: 0
-
-suspend fun onListScrolledToEnd(
-    lazyListState: LazyListState,
-    totalItems: Int,
-    onScrolledToEnd: () -> Unit,
-) {
-    snapshotFlow { lazyListState.layoutInfo }
-        .collect { layoutInfo ->
-            val lastVisibleIndex = layoutInfo.visibleItemsInfo.lastOrNull()?.index
-            if (lastVisibleIndex != null && lastVisibleIndex >= totalItems - 1) {
-                onScrolledToEnd()
-            }
-        }
-}

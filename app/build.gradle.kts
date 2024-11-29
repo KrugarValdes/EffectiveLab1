@@ -1,12 +1,14 @@
 plugins {
+    //alias(libs.plugins.room)
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("com.google.devtools.ksp")
 }
 
 android {
     namespace = "com.effectivelab1.heroapp"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.effectivelab1.heroapp"
@@ -41,6 +43,11 @@ android {
 
 dependencies {
 
+    implementation(libs.androidx.runtime.livedata)
+    val room_version = "2.6.1"
+    implementation("androidx.room:room-runtime:$room_version")
+    ksp("androidx.room:room-compiler:2.5.0")
+    implementation("androidx.room:room-ktx:$room_version")
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.retrofit)
     implementation(libs.logging.interceptor)
@@ -70,4 +77,5 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    annotationProcessor(libs.androidx.room.compiler)
 }

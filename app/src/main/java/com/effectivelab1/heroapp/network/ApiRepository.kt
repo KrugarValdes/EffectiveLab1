@@ -3,7 +3,7 @@ package com.effectivelab1.heroapp.network
 import com.effectivelab1.heroapp.constants.ApiKeys
 import com.effectivelab1.heroapp.presentation.models.MarvelCharacter
 
-class MarvelRepository {
+class ApiRepository {
     private val apiService = RetrofitClient.apiService
 
     suspend fun getCharacters(offset: Int): List<MarvelCharacter> =

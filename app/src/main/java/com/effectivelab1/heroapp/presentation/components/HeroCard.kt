@@ -5,7 +5,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
@@ -30,8 +29,9 @@ import com.effectivelab1.heroapp.presentation.models.MarvelCharacter
 fun HeroCard(
     hero: MarvelCharacter,
     onClick: () -> Unit,
-    scale: Float,
     modifier: Modifier = Modifier,
+    fontSize: Float,
+    textPadding: Float,
 ) {
     val cardShape = RoundedCornerShape(Constants.heroCardCornerShape)
     val backgroundColor = colorResource(id = R.color.card_background)
@@ -39,10 +39,7 @@ fun HeroCard(
     Card(
         modifier =
         modifier
-            .size(
-                width = (Constants.heroCardWidth.value * scale).dp,
-                height = (Constants.heroCardHeight.value * scale).dp,
-            ).shadow(
+            .shadow(
                 elevation = Constants.heroCardShadowElevation,
                 shape = cardShape,
                 clip = true,
@@ -64,7 +61,7 @@ fun HeroCard(
 
             Text(
                 text = hero.name,
-                fontSize = (Constants.heroCardNameFontSize.value * scale).sp,
+                fontSize = fontSize.sp,
                 fontFamily = Constants.interFontFamily,
                 fontWeight = FontWeight.ExtraBold,
                 color = Color.White,
@@ -74,14 +71,14 @@ fun HeroCard(
                     Shadow(
                         color = Color.Black,
                         offset = Offset(2f, 2f),
-                        blurRadius = 4f
-                    )
+                        blurRadius = 4f,
+                    ),
                 ),
                 modifier =
                 Modifier
                     .padding(
-                        start = (Constants.heroCardTextStartPadding.value * scale).dp,
-                        bottom = (Constants.heroCardTextBottomPadding.value * scale).dp,
+                        start = textPadding.dp,
+                        bottom = textPadding.dp,
                     ),
             )
         }

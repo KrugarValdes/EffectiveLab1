@@ -9,32 +9,27 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="565b7f03-7d3c-44b2-bd75-50b4122bb362" name="Changes" comment="1. clear">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/constants/ApiKeys.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/network/MarvelApiInterceptor.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/network/MarvelApiService.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/network/MarvelRepository.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/network/RetrofitClient.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/presentation/models/MarvelResponse.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/presentation/viewModel/CharacterViewModel.kt" afterDir="false" />
+    <list default="true" id="565b7f03-7d3c-44b2-bd75-50b4122bb362" name="Changes" comment="refactor: improve code quality">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/data/AppDatabase.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/data/CharacterDao.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/data/CharacterEntity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/data/CharacterRepository.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/util/CharacterMapper.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/constants/ApiKeys.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/constants/ApiKeys.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/constants/Constants.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/constants/Constants.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/model/Hero.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/navigation/Navgraph.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/navigation/Navgraph.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/ui/components/DataProvider.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/ui/components/HeroCard.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/presentation/components/HeroCard.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/ui/components/ImageLoader.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/presentation/components/ImageLoader.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/ui/screens/heroInfoScreen/HeroDetailScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/presentation/screens/heroInfoScreen/HeroDetailScreen.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/ui/screens/mainScreen/HeroBackgroundTriangle.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/presentation/screens/mainScreen/HeroBackgroundTriangle.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/ui/screens/mainScreen/HeroListCard.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/presentation/screens/mainScreen/HeroListCard.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/ui/screens/mainScreen/HeroListScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/presentation/screens/mainScreen/HeroListScreen.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/ui/theme/Theme.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/presentation/theme/Theme.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/ui/theme/Type.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/presentation/theme/Type.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/network/MarvelRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/network/ApiRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/presentation/screens/heroInfoScreen/HeroDetailScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/presentation/screens/heroInfoScreen/HeroDetailScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/presentation/screens/mainScreen/HeroListCard.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/presentation/screens/mainScreen/HeroListCard.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/presentation/screens/mainScreen/HeroListScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/presentation/screens/mainScreen/HeroListScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/presentation/viewModel/CharacterViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/effectivelab1/heroapp/presentation/viewModel/CharacterViewModel.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/xml/heroes_data.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gradle/libs.versions.toml" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/libs.versions.toml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -45,7 +40,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\smvit\.android\avd\Pixel_7_Pro_API_35.avd)]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\smvit\.android\avd\Pixel_7_Pro_API_35_21.avd)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -80,6 +75,9 @@
     &quot;accountId&quot;: &quot;971bdbad-de8f-4248-b35f-10867d0143f7&quot;
   }
 }</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$USER_HOME$/AppData/Local/Google/AndroidStudio2024.2/device-explorer/Pixel 7 Pro API 35 21/_/data/data/com.effectivelab1.heroapp/databases/marvel-database-shm" root0="SKIP_INSPECTION" />
+  </component>
   <component name="KotlinScriptingSettings">
     <scriptDefinition className="org.jetbrains.kotlin.scripting.resolve.KotlinScriptDefinitionFromAnnotatedTemplate" definitionName="KotlinBuildScript">
       <order>2147483647</order>
@@ -99,16 +97,19 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Android App.app.executor&quot;: &quot;Run&quot;,
+    &quot;PROJECT_TRUSTED_KEY&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/lab2&quot;,
+    &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/lab3&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/smvit/AndroidStudioProjects/androidLabs-feature-lab-3_local_room&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Dependencies&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2045231&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.detekt&quot;
   }
 }</component>
@@ -118,6 +119,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\smvit\AndroidStudioProjects\HeroApp\app\src\main\java\com\effectivelab1\heroapp" />
       <recent name="C:\Users\smvit\AndroidStudioProjects\HeroApp\app\src\main\java\com\effectivelab1\heroapp\network" />
     </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
@@ -204,6 +206,29 @@
       <updated>1730313045301</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="feature/lab2" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="1. clear" />

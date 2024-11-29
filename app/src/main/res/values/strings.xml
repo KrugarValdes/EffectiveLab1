@@ -2,4 +2,7 @@
     <string name="app_name">Marvel Heroes</string>
     <string name="choose_your_hero">Choose your hero</string>
     <string name="marvel_logo_description">Marvel Logo</string>
+    <string name="loading_string">Loading...</string>
+    <string name="reload_toast_message">Перезагрузка базы данных...</string>
+    <string name="reload_button_description">Кнопка перезагрузки базы данных</string>
 </resources>
