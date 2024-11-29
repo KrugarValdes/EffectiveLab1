@@ -28,24 +28,24 @@ fun ReloadButton(
     val context = LocalContext.current
     Box(
         modifier =
-        modifier
-            .size(Constants.reloadButtonSize)
-            .background(Color.Gray, shape = CircleShape)
-            .pointerInput(Unit) {
-                detectTapGestures(
-                    onLongPress = {
-                        Toast
-                            .makeText(
-                                context,
-                                context.getString(R.string.reload_toast_message),
-                                Toast.LENGTH_SHORT,
-                            ).show()
-                    },
-                    onTap = {
-                        viewModel.clearDatabaseAndReload()
-                    },
-                )
-            },
+            modifier
+                .size(Constants.reloadButtonSize)
+                .background(Color.Gray, shape = CircleShape)
+                .pointerInput(Unit) {
+                    detectTapGestures(
+                        onLongPress = {
+                            Toast
+                                .makeText(
+                                    context,
+                                    context.getString(R.string.reload_toast_message),
+                                    Toast.LENGTH_SHORT,
+                                ).show()
+                        },
+                        onTap = {
+                            viewModel.clearDatabaseAndReload()
+                        },
+                    )
+                },
         contentAlignment = Alignment.Center,
     ) {
         Icon(

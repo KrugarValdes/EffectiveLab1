@@ -22,9 +22,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.effectivelab1.heroapp.R
-import com.effectivelab1.heroapp.util.Constants
-import com.effectivelab1.heroapp.data.model.MarvelCharacter
 import com.effectivelab1.heroapp.data.model.MarvelCharacterUI
+import com.effectivelab1.heroapp.util.Constants
 
 @Composable
 fun HeroCard(
@@ -39,19 +38,19 @@ fun HeroCard(
 
     Card(
         modifier =
-        modifier
-            .shadow(
-                elevation = Constants.heroCardShadowElevation,
-                shape = cardShape,
-                clip = true,
-            ).clip(cardShape)
-            .clickable { onClick() },
+            modifier
+                .shadow(
+                    elevation = Constants.heroCardShadowElevation,
+                    shape = cardShape,
+                    clip = true,
+                ).clip(cardShape)
+                .clickable { onClick() },
     ) {
         Box(
             modifier =
-            Modifier
-                .fillMaxSize()
-                .background(backgroundColor),
+                Modifier
+                    .fillMaxSize()
+                    .background(backgroundColor),
             contentAlignment = Alignment.BottomStart,
         ) {
             ImageLoader(
@@ -67,20 +66,20 @@ fun HeroCard(
                 fontWeight = FontWeight.ExtraBold,
                 color = Color.White,
                 style =
-                TextStyle(
-                    shadow =
-                    Shadow(
-                        color = Color.Black,
-                        offset = Offset(2f, 2f),
-                        blurRadius = 4f,
+                    TextStyle(
+                        shadow =
+                            Shadow(
+                                color = Color.Black,
+                                offset = Offset(2f, 2f),
+                                blurRadius = 4f,
+                            ),
                     ),
-                ),
                 modifier =
-                Modifier
-                    .padding(
-                        start = textPadding.dp,
-                        bottom = textPadding.dp,
-                    ),
+                    Modifier
+                        .padding(
+                            start = textPadding.dp,
+                            bottom = textPadding.dp,
+                        ),
             )
         }
     }

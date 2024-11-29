@@ -29,18 +29,18 @@ fun BackgroundTriangle(selectedColor: Color) {
     ) {
         Canvas(
             modifier =
-            Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(Constants.screenTriangleSize),
+                Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(Constants.screenTriangleSize),
         ) {
             drawPath(
                 path =
-                Path().apply {
-                    moveTo(size.width, size.height)
-                    lineTo(0f, size.height)
-                    lineTo(size.width, 0f)
-                    close()
-                },
+                    Path().apply {
+                        moveTo(size.width, size.height)
+                        lineTo(0f, size.height)
+                        lineTo(size.width, 0f)
+                        close()
+                    },
                 color = animatedColor.value,
             )
         }

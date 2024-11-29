@@ -25,10 +25,9 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.effectivelab1.heroapp.util.Constants
-import com.effectivelab1.heroapp.presentation.screens.components.HeroCard
-import com.effectivelab1.heroapp.data.model.MarvelCharacter
 import com.effectivelab1.heroapp.data.model.MarvelCharacterUI
+import com.effectivelab1.heroapp.presentation.screens.components.HeroCard
+import com.effectivelab1.heroapp.util.Constants
 import kotlin.math.abs
 
 @Composable

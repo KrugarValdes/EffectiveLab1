@@ -21,9 +21,9 @@ fun NavigationBackButton(
     IconButton(
         onClick = { navigator.popBackStack() },
         modifier =
-        modifier
-            .padding(iconButtonPaddingStart)
-            .size(sizeIconArrowBack),
+            modifier
+                .padding(iconButtonPaddingStart)
+                .size(sizeIconArrowBack),
     ) {
         Icon(
             imageVector = Icons.AutoMirrored.Filled.ArrowBack,

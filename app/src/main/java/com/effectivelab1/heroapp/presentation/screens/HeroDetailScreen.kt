@@ -16,12 +16,12 @@ import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
-import com.effectivelab1.heroapp.util.Constants
-import com.effectivelab1.heroapp.presentation.screens.components.ImageLoader
 import com.effectivelab1.heroapp.data.model.MarvelCharacterUI
+import com.effectivelab1.heroapp.presentation.screens.components.ImageLoader
 import com.effectivelab1.heroapp.presentation.screens.components.LoadingText
-import com.effectivelab1.heroapp.presentation.viewModel.CharacterViewModel
 import com.effectivelab1.heroapp.presentation.screens.components.NavigationBackButton
+import com.effectivelab1.heroapp.presentation.viewModel.CharacterViewModel
+import com.effectivelab1.heroapp.util.Constants
 
 @Composable
 fun HeroDetailScreen(
@@ -56,9 +56,9 @@ fun HeroDetailScreen(
 private fun HeroInformation(currentHero: MarvelCharacterUI) {
     Column(
         modifier =
-        Modifier
-            .fillMaxSize()
-            .padding(bottom = Constants.heroInfoBottomPadding, start = Constants.heroInfoStartPadding),
+            Modifier
+                .fillMaxSize()
+                .padding(bottom = Constants.heroInfoBottomPadding, start = Constants.heroInfoStartPadding),
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.Start,
     ) {
@@ -76,14 +76,14 @@ private fun HeroName(name: String) {
         fontWeight = FontWeight.ExtraBold,
         color = Color.White,
         style =
-        TextStyle(
-            shadow =
-            Shadow(
-                color = Color.Black,
-                offset = Offset(2f, 2f),
-                blurRadius = 4f,
+            TextStyle(
+                shadow =
+                    Shadow(
+                        color = Color.Black,
+                        offset = Offset(2f, 2f),
+                        blurRadius = 4f,
+                    ),
             ),
-        ),
         modifier = Modifier.padding(bottom = Constants.heroNameBottomPadding),
     )
 }
@@ -98,15 +98,13 @@ private fun HeroDescription(description: String) {
         fontWeight = FontWeight.ExtraBold,
         color = Color.White,
         style =
-        TextStyle(
-            shadow =
-            Shadow(
-                color = Color.Black,
-                offset = Offset(2f, 2f),
-                blurRadius = 4f,
+            TextStyle(
+                shadow =
+                    Shadow(
+                        color = Color.Black,
+                        offset = Offset(2f, 2f),
+                        blurRadius = 4f,
+                    ),
             ),
-        ),
     )
 }
-
-
